@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container">
-        <div class="col-sm-offset-2 col-sm-8">
+        <!--<div class="col-sm-offset-2 col-sm-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     New Disc
@@ -34,12 +34,12 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div> -->
 
             @if (count($discs) > 0)
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Current Discs
+                        Últimos discos
                     </div>
 
                     <div class="panel-body">
@@ -47,8 +47,11 @@
                         <table class="table table-striped disc-table">
 
                             <thead>
-                                <th>Disc</th>
+                                <th>Disco</th>
                                 <th>&nbsp;</th>
+                                <th>Artista</th>
+                                <th>Grupo</th>
+                                <th>Estilos</th>
                             </thead>
 
                             <tbody>
@@ -58,7 +61,7 @@
                                             <div>{{ $disc->name }}</div>
                                         </td>
 
-                                        <td>
+                                        <!--<td>
                                             <form action="{{ url('disc/'.$disc->id) }}" method="POST">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
@@ -66,7 +69,21 @@
                                                 <button type="submit" id="delete-disc-{{ $disc->id }}" class="btn btn-danger">
                                                     <i class="fa fa-btn fa-trash"></i>Delete
                                                 </button>
-                                            </form>
+                                            </form> 
+                                        </td>-->
+
+                                        <td>
+                                            <div><img src="{{ $disc->img_path }}" alt="{{ $disc->name }}" height="50" width="50"></div>
+                                        </td>
+
+                                        <td>
+                                        </td>
+
+                                        <td>
+                                            <div>{{ var_dump($disc) }}</div>
+                                        </td>
+
+                                        <td>
                                         </td>
                                     </tr>
                                 @endforeach

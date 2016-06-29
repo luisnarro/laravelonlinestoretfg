@@ -16,19 +16,27 @@ class DiscController extends Controller
 
     public function __construct(DiscRepository $discs)
     {
-    	$this->middleware('auth');
+    	//$this->middleware('auth');
+        $this->middleware('auth', ['except' => ['index']]);
 
         $this->discs = $discs;
     }
 
+    // Lista los últimos discos incorporados
     public function index(Request $request)
     {
 
-    	return view('discs.index', [
+    	/*return view('discs.index', [
             'discs' => $this->discs->forUser($request->user()),
+        ]);*/
+
+        return view('discs.index', [
+            'discs' => $this->discs->lastAdded(),
         ]);
     }
 
+
+    // Funciónes de administración de discos.
     public function store(Request $request)
     {
     	$this->validate($request, [

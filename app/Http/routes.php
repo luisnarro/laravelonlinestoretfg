@@ -20,6 +20,6 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 Route::get('/discs', 'DiscController@index');
-Route::post('/disc', 'DiscController@store');
-Route::delete('/disc/{disc}', 'DiscController@destroy');
+//Route::post('/disc', 'DiscController@store');
+//Route::delete('/disc/{disc}', 'DiscController@destroy');
 

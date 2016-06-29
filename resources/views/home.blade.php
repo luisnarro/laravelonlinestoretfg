@@ -8,7 +8,7 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    ¡Te has autenticado!. Esta es tu zona personal en la tienda, aquí podrás gestionar tus compras y tu lista de deseos.
                 </div>
             </div>
         </div>

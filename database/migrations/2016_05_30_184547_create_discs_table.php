@@ -14,13 +14,15 @@ class CreateDiscsTable extends Migration
     {
         Schema::create('discs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->index();
+            $table->bigInteger('ean');
             $table->timestamps();
             $table->string('name');
             $table->integer('year');
             $table->integer('format');
             $table->integer('nsongs');
             $table->double('totalduration');
+            $table->integer('artist_id');
+            $table->integer('group_id');
         });
     }
 
