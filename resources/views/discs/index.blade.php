@@ -77,10 +77,11 @@
                                         </td>
 
                                         <td>
+                                            <div></div>
                                         </td>
 
                                         <td>
-                                            <div>{{ var_dump($disc) }}</div>
+                                            <div>{{ $prueba->first()->name }}</div>
                                         </td>
 
                                         <td>

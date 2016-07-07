@@ -14,7 +14,7 @@ class DiscController extends Controller
 
     protected $discs;
 
-    public function __construct(DiscRepository $discs)
+    public function __construct(Disc $discs)
     {
     	//$this->middleware('auth');
         $this->middleware('auth', ['except' => ['index']]);
@@ -26,12 +26,18 @@ class DiscController extends Controller
     public function index(Request $request)
     {
 
-    	/*return view('discs.index', [
-            'discs' => $this->discs->forUser($request->user()),
-        ]);*/
+
+        $discList = Disc::all();
+        $grupos = Disc::find(1)->group_list()->get();
+        $prueba = null;
+
+        foreach ($grupos as $grupo) {
+            $prueba = $grupo->name;
+        }
 
         return view('discs.index', [
-            'discs' => $this->discs->lastAdded(),
+            'discs' => $discList,
+            'prueba' => $grupos,
         ]);
     }
 

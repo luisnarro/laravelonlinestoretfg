@@ -13,7 +13,7 @@ class CreateDiscsTable extends Migration
     public function up()
     {
         Schema::create('discs', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('disc_id');
             $table->bigInteger('ean');
             $table->timestamps();
             $table->string('name');
@@ -23,6 +23,7 @@ class CreateDiscsTable extends Migration
             $table->double('totalduration');
             $table->integer('artist_id');
             $table->integer('group_id');
+            $table->string('img_path');
         });
     }
 
