@@ -23,3 +23,9 @@ Route::get('/discs', 'DiscController@index');
 //Route::post('/disc', 'DiscController@store');
 //Route::delete('/disc/{disc}', 'DiscController@destroy');
 
+Route::get('/groups', 'GroupController@index');
+Route::get('/groups/{id}', [
+	'as'   => 'groups.groupInfo',
+	'uses' =>'GroupController@groupInfo'
+]);
+

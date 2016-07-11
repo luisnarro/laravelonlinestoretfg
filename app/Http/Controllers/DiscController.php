@@ -28,16 +28,14 @@ class DiscController extends Controller
 
 
         $discList = Disc::all();
-        $grupos = Disc::find(1)->group_list()->get();
-        $prueba = null;
 
-        foreach ($grupos as $grupo) {
-            $prueba = $grupo->name;
+        foreach ($discList as $disc) {
+            $groups = Disc::find($disc->id)->group_list()->get();
+            $disc['groups'] = $groups;
         }
 
         return view('discs.index', [
             'discs' => $discList,
-            'prueba' => $grupos,
         ]);
     }
 

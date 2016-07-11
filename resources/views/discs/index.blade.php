@@ -70,6 +70,7 @@
                                                     <i class="fa fa-btn fa-trash"></i>Delete
                                                 </button>
                                             </form> 
+                                            $prueba->first()->name
                                         </td>-->
 
                                         <td>
@@ -81,11 +82,13 @@
                                         </td>
 
                                         <td>
-                                            <div>{{ $prueba->first()->name }}</div>
+                                            <div>
+                                                {!! Html::linkAction('GroupController@groupInfo', $disc->groups->first()->name, array($disc->groups->first()->id)) !!}
+                                            </div>
                                         </td>
-
                                         <td>
                                         </td>
+                                        
                                     </tr>
                                 @endforeach
                             </tbody>

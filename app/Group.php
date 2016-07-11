@@ -9,10 +9,9 @@ class Group extends Model
     
     protected $fillable = ['name'];
 
-/*
-    public function discs()
+    public function disc_list()
     {
-    	return $this->belongsToMany('App\Disc', 'group_to_disc', 'disc_id', 'group_id');
+    	return $this->belongsToMany('App\Disc', 'group_to_disc', 'group_id', 'disc_id');
     }
-*/
+
 }
