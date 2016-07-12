@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Disc;
+use Cart;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -26,12 +27,14 @@ class DiscController extends Controller
     public function index(Request $request)
     {
 
-
+        Cart::instance('shopping')->add('192ao12', 'Product 1', 1, 9.99);
         $discList = Disc::all();
 
         foreach ($discList as $disc) {
             $groups = Disc::find($disc->id)->group_list()->get();
+            $artists = Disc::find($disc->id)->artist_list()->get();
             $disc['groups'] = $groups;
+            $disc['artists'] = $artists;
         }
 
         return view('discs.index', [

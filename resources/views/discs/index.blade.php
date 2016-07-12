@@ -78,7 +78,7 @@
                                         </td>
 
                                         <td>
-                                            <div></div>
+                                            <div>{!! Html::linkAction('ArtistController@artistInfo', $disc->artists->first()->name, array($disc->artists->first()->id)) !!}</div>
                                         </td>
 
                                         <td>

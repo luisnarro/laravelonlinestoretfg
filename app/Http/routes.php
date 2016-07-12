@@ -29,3 +29,9 @@ Route::get('/groups/{id}', [
 	'uses' =>'GroupController@groupInfo'
 ]);
 
+Route::get('/artists', 'ArtistController@index');
+Route::get('/artists/{id}', [
+	'as'   => 'artists.artistInfo',
+	'uses' =>'ArtistController@artistInfo'
+]);
+

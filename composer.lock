@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1b4ca1eb1fe4479284544a7fc343bd86",
-    "content-hash": "0a410491f59ccf215603d7c4af9494f0",
+    "hash": "daf29a417dcab718792d5d8afe54ccfa",
+    "content-hash": "e7aac985e8c1e3b88171fd079201e560",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -562,6 +562,56 @@
                 "parser"
             ],
             "time": "2014-09-09 13:34:57"
+        },
+        {
+            "name": "gloudemans/shoppingcart",
+            "version": "2.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Crinsane/LaravelShoppingcart.git",
+                "reference": "0c3c859b6c8b55d6cd6be118cb96bc0c8f37063c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Crinsane/LaravelShoppingcart/zipball/0c3c859b6c8b55d6cd6be118cb96bc0c8f37063c",
+                "reference": "0c3c859b6c8b55d6cd6be118cb96bc0c8f37063c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/events": "5.1.*|5.2.*",
+                "illuminate/session": "5.1.*|5.2.*",
+                "illuminate/support": "5.1.*|5.2.*"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9.0",
+                "orchestra/testbench": "~3.0",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "gloudemans/notify": "Simple flash notifications for Laravel"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Gloudemans\\Shoppingcart\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rob Gloudemans",
+                    "email": "info@robgloudemans.nl"
+                }
+            ],
+            "description": "Laravel Shoppingcart",
+            "keywords": [
+                "laravel",
+                "shoppingcart"
+            ],
+            "time": "2016-06-30 13:43:08"
         },
         {
             "name": "jakub-onderka/php-console-color",

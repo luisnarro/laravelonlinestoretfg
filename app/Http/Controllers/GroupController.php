@@ -21,7 +21,7 @@ class GroupController extends Controller
         $this->groups = $groups;
     }
 
-    // Lista los últimos discos incorporados
+    // Lista los últimos grupos
     public function index(Request $request)
     {
 
@@ -42,7 +42,7 @@ class GroupController extends Controller
     }
 
 
-    // Funciónes de administración de discos.
+    // Funciónes de administración de grupos.
     public function store(Request $request)
     {
     	$this->validate($request, [

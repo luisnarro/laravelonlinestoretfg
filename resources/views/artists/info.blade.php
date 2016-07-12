@@ -37,7 +37,7 @@
         </div> -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Información del grupo
+                    Información del artista
                 </div>
 
                 <div class="panel-body">
@@ -45,23 +45,23 @@
                     <table class="table table-striped disc-table">
 
                         <thead>
-                            <th>Grupo</th>
+                            <th>Artista</th>
                             <th>&nbsp;</th>
-                            <th>Componentes</th>
+                            <th>Resumen</th>
                         </thead>
 
                         <tbody>
                            
                             <tr>
                                 <td class="table-text">
-                                    <div>{{ $group->first()->name }}</div>
+                                    <div>{{ $artist->first()->name }}</div>
                                 </td>
 
                                 <td>
                                 </td>
                                 
                                 <td>
-                                    <div></div>
+                                    <div>{{ $artist->first()->bio }}</div>
                                 </td>
 
                             </tr>
