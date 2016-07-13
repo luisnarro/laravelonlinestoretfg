@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Group;
+use App\Disc;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -27,9 +28,9 @@ class GroupController extends Controller
 
         $groupList = Disc::all();
 
-        return view('groups.index', [
+        /*return view('groups.index', [
             'groups' => $groupList,
-        ]);
+        ]);*/
     }
 
     public function groupInfo(Request $request, $id)

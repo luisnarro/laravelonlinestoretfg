@@ -13,7 +13,7 @@ class CreateFormatsTable extends Migration
     public function up()
     {
         Schema::create('formats', function (Blueprint $table) {
-            $table->increments('format_id');
+            $table->increments('id');
             $table->timestamps();
             $table->string('name');
         });

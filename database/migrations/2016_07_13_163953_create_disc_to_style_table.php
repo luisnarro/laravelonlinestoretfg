@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStylesTable extends Migration
+class CreateDiscToStyleTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,11 @@ class CreateStylesTable extends Migration
      */
     public function up()
     {
-        Schema::create('styles', function (Blueprint $table) {
-            $table->increments('style_id');
-            $table->timestamps();
-            $table->string('name');
+        Schema::create('disc_to_style', function (Blueprint $table) {
+            $table->integer('disc_id');
+            $table->integer('style_id');
+            
+            $table->primary(['disc_id', 'style_id']);
         });
     }
 
@@ -26,6 +27,6 @@ class CreateStylesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('styles');
+        Schema::drop('disc_to_style');
     }
 }

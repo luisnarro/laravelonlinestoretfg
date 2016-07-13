@@ -47,7 +47,7 @@
                         <table class="table table-striped disc-table">
 
                             <thead>
-                                <th>Disco</th>
+                                <th>Discos</th>
                                 <th>&nbsp;</th>
                                 <th>Artista</th>
                                 <th>Grupo</th>
@@ -78,7 +78,7 @@
                                         </td>
 
                                         <td>
-                                            <div>{!! Html::linkAction('ArtistController@artistInfo', $disc->artists->first()->name, array($disc->artists->first()->id)) !!}</div>
+                                            <div>{!! Html::linkAction('ArtistController@artistInfo', $disc->groups->first()->artists->first()->name, array($disc->groups->first()->artists->first()->id)) !!} </div>
                                         </td>
 
                                         <td>
@@ -87,6 +87,17 @@
                                             </div>
                                         </td>
                                         <td>
+                                            <div class="dropdown">
+                                                <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Estilos
+                                                <span class="caret"></span></button>
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                                    @foreach ($disc->styles as $style)
+                                                        <li role="presentation">
+                                                            {!! Html::linkAction('StyleController@styleDiscs', $style->name, array($style->id)) !!}
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
                                         </td>
                                         
                                     </tr>

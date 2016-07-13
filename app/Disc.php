@@ -19,4 +19,9 @@ class Disc extends Model
     	return $this->belongsToMany('App\Artist', 'artist_to_disc', 'disc_id', 'artist_id');
     }
 
+    public function style_list()
+    {
+        return $this->belongsToMany('App\Style', 'disc_to_style', 'disc_id', 'style_id');
+    }
+
 }
