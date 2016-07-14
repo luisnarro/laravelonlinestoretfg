@@ -38,7 +38,7 @@
             @if (count($discs) > 0)
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Últimos discos
+                        Discos que contienen el estilo de música: {{ $style_name }}
                     </div>
 
                     <div class="panel-body">
@@ -60,20 +60,8 @@
                                             <div>{{ $disc->name }}</div>
                                         </td>
 
-                                        <!--<td>
-                                            <form action="{{ url('disc/'.$disc->id) }}" method="POST">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
-
-                                                <button type="submit" id="delete-disc-{{ $disc->id }}" class="btn btn-danger">
-                                                    <i class="fa fa-btn fa-trash"></i>Delete
-                                                </button>
-                                            </form> 
-                                            $prueba->first()->name
-                                        </td>-->
-
                                         <td>
-                                            <div><img src="{{ $disc->img_path }}" alt="{{ $disc->name }}" height="50" width="50"></div>
+                                            <div><img src="../../{{ $disc->img_path }}" alt="{{ $disc->name }}" height="50" width="50"></div>
                                         </td>
 
                                         <td>

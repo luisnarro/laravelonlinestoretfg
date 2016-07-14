@@ -24,6 +24,16 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    public function shopping_cart()
+    {
+        return $this->hasOne('Cart');
+    }
+
+    public function whishlist()
+    {
+        return $this->hasOne('Cart');
+    }
+
     /*
     public function discs()
     {

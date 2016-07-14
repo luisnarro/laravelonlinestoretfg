@@ -29,14 +29,6 @@ class StyleController extends Controller
     public function styleDiscs(Request $request, $id)
     {
         
-        $style = Style::find($id)->get()->first();
-        $discs = $style->disc_list();
-        $style_name = $style->name;
-
-        return view('styles.discs', [
-            'discs' => $discs,
-            'style' => $style_name,
-        ]);
     }
 
 

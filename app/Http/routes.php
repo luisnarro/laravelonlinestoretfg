@@ -37,6 +37,11 @@ Route::get('/artists/{id}', [
 
 Route::get('/styles', 'StyleController@index');
 Route::get('/styles/{id}', [
-	'as'   => 'styles.artistInfo',
-	'uses' =>'StyleController@styleDiscs'
+	'as'	=> 'styles.artistInfo',
+	'uses'	=> 'StyleController@styleDiscs'
+]);
+
+Route::get('/styles/{id}/discs', [
+	'as'	=> 'discs.discs_by_style',
+	'uses'	=> 'DiscController@discs_by_style'
 ]);
