@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', 'UserController@index');
 
 Route::get('/discs', 'DiscController@index');
 //Route::post('/disc', 'DiscController@store');

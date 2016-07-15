@@ -73,7 +73,7 @@
                                         </td>-->
 
                                         <td>
-                                            <div><img src="{{ $disc->img_path }}" alt="{{ $disc->name }}" height="50" width="50"></div>
+                                            <div><img src="{{ url('/').$disc->img_path }}" alt="{{ $disc->name }}" height="50" width="50"></div>
                                         </td>
 
                                         <td>
