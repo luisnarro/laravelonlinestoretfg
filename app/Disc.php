@@ -36,7 +36,7 @@ class Disc extends Model implements Buyable
      */
     public function getBuyableIdentifier()
     {
-
+        return strval($this->attributes['id']);
     }
 
     /**
@@ -46,7 +46,7 @@ class Disc extends Model implements Buyable
      */
     public function getBuyableDescription()
     {
-
+        return $this->attributes['name'];
     }
 
     /**
@@ -56,7 +56,7 @@ class Disc extends Model implements Buyable
      */
     public function getBuyablePrice()
     {
-
+        return 99;
     }
 
 }

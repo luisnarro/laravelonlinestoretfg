@@ -18,6 +18,10 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/home', 'UserController@index');
+Route::get('/user/addtocart/{id}', [
+	'as'   => 'user.add_to_cart',
+	'uses' =>'UserController@add_to_cart'
+]);
 
 Route::get('/discs', 'DiscController@index');
 //Route::post('/disc', 'DiscController@store');

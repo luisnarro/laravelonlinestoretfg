@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 
 use App\User;
+use App\Disc;
+use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -31,6 +33,27 @@ class UserController extends Controller
         return view('home', [
             
         ]);
+    }
+
+    public function add_to_cart(Request $request, $disc_id)
+    {
+        Cart::instance('shoppingcart');
+        $disc = Disc::find($disc_id);
+        $cartItem = Cart::add($disc);
+        Cart::store(strval(Auth::user()->id));
+
+        $carro = Cart::content();
+
+        //$parameters = ['disco' => $disc, 'usuario' => $this->user];
+        //return redirect()->back()->with($parameters);
+
+        return view('discs.prueba', [
+            'carro' => $carro,
+            'id' => Auth::user()->id,
+            'strid' => strval($this->user->id),
+            'cantidad' => Cart::get($cartItem->rowId)->qty,
+        ]);
+        
     }
 
 

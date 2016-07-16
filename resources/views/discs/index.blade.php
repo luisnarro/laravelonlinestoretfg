@@ -51,6 +51,7 @@
                                 <th>Artista</th>
                                 <th>Grupo</th>
                                 <th>Estilos</th>
+                                <th>&nbsp;</th>
                             </thead>
 
                             <tbody>
@@ -97,6 +98,9 @@
                                                     @endforeach
                                                 </ul>
                                             </div>
+                                        </td>
+                                        <td>
+                                            {!! Html::linkAction('UserController@add_to_cart', 'Añadir al carro', array($disc->id), array('class' => 'btn btn-primary btn-mini')) !!}
                                         </td>
                                         
                                     </tr>
