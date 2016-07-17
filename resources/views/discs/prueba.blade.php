@@ -11,9 +11,7 @@
 
                     <div class="panel-body">
                         {{ var_dump($carro) }}
-                        {{ var_dump($id) }}
-                        {{ var_dump($strid) }}
-                        {{ $cantidad }}
+                        {{ var_dump($id) }}                      
                     </div>
                 </div>
         </div>
