@@ -53,10 +53,10 @@
                     <li><a href="{{ url('/discs') }}">Todos los discos</a></li>
                 </ul>
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/discs') }}">CD's</a></li>
+                    <li><a href="{{ url('/discs/formato/1') }}">CD's</a></li>
                 </ul>
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/discs') }}">Vinilos</a></li>
+                    <li><a href="{{ url('/discs/formato/2') }}">Vinilos</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

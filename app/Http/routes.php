@@ -34,6 +34,10 @@ Route::get('/user/shoppingcart', [
 ]);
 
 Route::get('/discs', 'DiscController@index');
+Route::get('/discs/formato/{id}', [
+	'as'   => 'discs.discos_formato',
+	'uses' =>'DiscController@discos_formato'
+]);
 //Route::post('/disc', 'DiscController@store');
 //Route::delete('/disc/{disc}', 'DiscController@destroy');
 

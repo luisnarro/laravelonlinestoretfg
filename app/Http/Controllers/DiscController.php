@@ -53,6 +53,17 @@ class DiscController extends Controller
         ]);
     }
 
+    public function discos_formato(Request $request, $id)
+    {
+        $discList = Disc::where('format', $id)->get();
+
+        $discList = $this->get_disc_info($discList);
+
+        return view('discs.index', [
+            'discs' => $discList,
+        ]);
+    }
+
     private function get_disc_info($discList)
     {
         foreach ($discList as $disc) {
