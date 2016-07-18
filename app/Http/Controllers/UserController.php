@@ -60,11 +60,22 @@ class UserController extends Controller
         //$parameters = ['disco' => $disc, 'usuario' => $this->user];
         //return redirect()->back()->with($parameters);
 
-        return view('discs.prueba', [
-            'carro' => $this->carro,
-            'id' => Auth::user()->id,
-        ]);
+        //return view('discs.prueba', [
+            //'carro' => $this->carro,
+            //'id' => Auth::user()->id,
+        //]);
+
+
+        return redirect()->back();
         
+    }
+
+    public function shoppingcart(Request $request)
+    {
+        return view('shoppingcart.shoppingcart', [
+            //'carro' => $this->carro,
+            //'id' => Auth::user()->id,
+        ]);
     }
 
 

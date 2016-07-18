@@ -17,10 +17,20 @@ Route::get('/', function () {
 
 Route::auth();
 
-Route::get('/home', 'UserController@index');
+Route::get('/home', [
+	'middleware' => 'auth',
+	'as'	=> 'user.index',
+	'uses'	=> 'UserController@index'
+]);
 Route::get('/user/addtocart/{id}', [
+	'middleware' => 'auth',
 	'as'   => 'user.add_to_cart',
 	'uses' =>'UserController@add_to_cart'
+]);
+Route::get('/user/shoppingcart', [
+	'middleware' => 'auth',
+	'as'   => 'user.shoppingcart',
+	'uses' =>'UserController@shoppingcart'
 ]);
 
 Route::get('/discs', 'DiscController@index');
