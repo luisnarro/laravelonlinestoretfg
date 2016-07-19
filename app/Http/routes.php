@@ -32,6 +32,21 @@ Route::get('/user/shoppingcart', [
 	'as'   => 'user.shoppingcart',
 	'uses' =>'UserController@shoppingcart'
 ]);
+Route::get('/user/checkoutsp', [
+	'middleware' => 'auth',
+	'as'   => 'user.checkoutsp',
+	'uses' =>'UserController@checkoutsp'
+]);
+Route::get('/user/update_usercart/{rowId}/{qty}', [
+	'middleware' => 'auth',
+	'as'   => 'user.update_usercart',
+	'uses' =>'UserController@update_usercart'
+]);
+Route::get('/user/remove_usercart_item/{rowId}', [
+	'middleware' => 'auth',
+	'as'   => 'user.remove_usercart_item',
+	'uses' =>'UserController@remove_usercart_item'
+]);
 
 Route::get('/discs', 'DiscController@index');
 Route::get('/discs/formato/{id}', [

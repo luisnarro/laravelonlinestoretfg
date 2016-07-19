@@ -16,7 +16,7 @@ class UserController extends Controller
 {
 
     protected $user;
-    protected $carro;
+    protected $usercart;
 
     public function __construct(User $user)
     {
@@ -26,7 +26,7 @@ class UserController extends Controller
 
         // Se recupera o crea la instancia del carro de compra para el usuario
         Cart::restore(strval(Auth::user()->id));
-        $this->carro = Cart::instance('shoppingcart'.strval(Auth::user()->id))->content();
+        $this->usercart = Cart::instance('shoppingcart'.strval(Auth::user()->id))->content();
         Cart::store(strval(Auth::user()->id));
 
     }
@@ -51,8 +51,8 @@ class UserController extends Controller
         
             //Cart::instance('shoppingcart');
             Cart::restore(strval(Auth::user()->id));
-            $this->carro = Cart::instance('shoppingcart'.strval(Auth::user()->id));
-            $cartItem = $this->carro->add($disc);
+            $this->usercart = Cart::instance('shoppingcart'.strval(Auth::user()->id));
+            $cartItem = $this->usercart->add($disc);
             Cart::store(strval(Auth::user()->id));
         
         //$carro = Cart::content();
@@ -73,9 +73,33 @@ class UserController extends Controller
     public function shoppingcart(Request $request)
     {
         return view('shoppingcart.shoppingcart', [
+            'usercart' => $this->usercart,
+            //'id' => Auth::user()->id,
+        ]);
+    }
+
+    public function checkoutsp(Request $request)
+    {
+        return view('shoppingcart.checkoutsp', [
             //'carro' => $this->carro,
             //'id' => Auth::user()->id,
         ]);
+    }
+
+    public function update_usercart(Request $request, $rowId, $qty)
+    {
+        Cart::restore(strval(Auth::user()->id));
+        Cart::update($rowId, $qty);
+        Cart::store(strval(Auth::user()->id));
+        return redirect()->back();
+    }
+
+    public function remove_usercart_item(Request $request, $rowId)
+    {
+        Cart::restore(strval(Auth::user()->id));
+        Cart::remove($rowId);
+        Cart::store(strval(Auth::user()->id));
+        return redirect()->back();
     }
 
 
