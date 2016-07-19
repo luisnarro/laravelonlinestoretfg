@@ -26,6 +26,7 @@
                         <tbody>
                             @foreach ($usercart as $item)
                                 <tr>
+                                    <form action="{{ action('UserController@update_usercart', ['rowId' => $item->rowId]) }}">
                                     <td data-th="Product">
                                         <div class="row">
                                             <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div>
@@ -37,15 +38,17 @@
                                     </td>
                                     <td data-th="Price">{{ $item->price }}€</td>
                                     <td data-th="Quantity">
-                                        <input type="number" class="form-control text-center" value="{{ $item->qty }}">
+                                        <input type="number" class="form-control text-center" name="qty" value="{{ $item->qty }}">
                                     </td>
                                     <td data-th="Subtotal" class="text-center">{{ $item->price }}</td>
                                     <td class="actions" data-th="">
+                                        {{ Form::submit('Actualizar', array('class' => 'btn btn-info btn-sm')) }}
                                         <!-- <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button> -->
-                                        {!! Html::linkAction('UserController@update_usercart', 'Actualizar', array($item->rowId, 1), array('class' => 'btn btn-info btn-sm')) !!}
+                                        <!-- {!! Html::linkAction('UserController@update_usercart', 'Actualizar', array($item->rowId, 1), array('class' => 'btn btn-info btn-sm')) !!}-->
                                         <!-- <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button> -->
                                         {!! Html::linkAction('UserController@remove_usercart_item', 'Quitar', array($item->rowId), array('class' => 'btn btn-danger btn-sm')) !!}
                                     </td>
+                                    </form>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -54,7 +57,7 @@
                                 <td class="text-center"><strong>Total 1.99</strong></td>
                             </tr>
                             <tr>
-                                <td><a href="#" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continuar comprando</a></td>
+                                <td><a href="{{ url('discs') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continuar comprando</a></td>
                                 <td colspan="2" class="hidden-xs"></td>
                                 <td class="hidden-xs text-center"><strong>Total {{ Cart::subtotal() }}</strong></td>
                                 <td><a href="{{ url('user/checkoutsp') }}" class="btn btn-success btn-block">Realizar pedido <i class="fa fa-angle-right"></i></a></td>

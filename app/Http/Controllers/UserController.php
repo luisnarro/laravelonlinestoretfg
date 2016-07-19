@@ -86,12 +86,16 @@ class UserController extends Controller
         ]);
     }
 
-    public function update_usercart(Request $request, $rowId, $qty)
+    public function update_usercart(Request $request, $rowId)
     {
-        Cart::restore(strval(Auth::user()->id));
-        Cart::update($rowId, $qty);
-        Cart::store(strval(Auth::user()->id));
-        return redirect()->back();
+        if ($request->has('qty'))
+        {
+            Cart::restore(strval(Auth::user()->id));
+            Cart::update($rowId, $request->input('qty'));
+            Cart::store(strval(Auth::user()->id));
+            return redirect()->back();
+        }
+        
     }
 
     public function remove_usercart_item(Request $request, $rowId)

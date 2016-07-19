@@ -37,7 +37,7 @@ Route::get('/user/checkoutsp', [
 	'as'   => 'user.checkoutsp',
 	'uses' =>'UserController@checkoutsp'
 ]);
-Route::get('/user/update_usercart/{rowId}/{qty}', [
+Route::get('/user/update_usercart/{rowId}', [
 	'middleware' => 'auth',
 	'as'   => 'user.update_usercart',
 	'uses' =>'UserController@update_usercart'
