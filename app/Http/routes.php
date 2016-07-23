@@ -78,3 +78,11 @@ Route::get('/styles/{id}/discs', [
 	'as'	=> 'discs.discs_by_style',
 	'uses'	=> 'DiscController@discs_by_style'
 ]);
+
+// Twitter OAuth2 login
+
+Route::get('/twitter', function () {
+    return view('twitter/twitterAuth');
+});
+Route::get('auth/twitter', 'Auth\AuthController@redirectToTwitter');
+Route::get('auth/twitter/callback', 'Auth\AuthController@handleTwitterCallback');

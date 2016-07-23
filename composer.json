@@ -9,7 +9,9 @@
         "laravel/framework": "5.2.*",
         "doctrine/dbal": "v2.5.4",
         "laravelcollective/html": "5.2.*",
-        "gloudemans/shoppingcart": "^2.1"
+        "gloudemans/shoppingcart": "^2.1",
+        "socialiteproviders/spotify": "^2.0",
+        "laravel/socialite": "~2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

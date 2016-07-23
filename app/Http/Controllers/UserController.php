@@ -106,5 +106,10 @@ class UserController extends Controller
         return redirect()->back();
     }
 
+    public function validate_checkout(Request $request)
+    {
+        
+    }
+
 
 }

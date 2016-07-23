@@ -7,6 +7,9 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Socialite;
+use Auth;
+use Esception;
 
 class AuthController extends Controller
 {
@@ -67,6 +70,35 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+        ]);
+    }
+
+    /**
+     * Funciones para manejar el login de Twitter.
+     */
+
+    public function redirectToTwitter()
+    {
+        return Socialite::driver('twitter')->redirect();
+    }
+
+    public function handleTwitterCallback()
+    {
+        /*try {
+            $user = Socialite::driver('twitter')->user();
+            $create['name'] = $user->name;
+            $create['email'] = $user->email;
+            $create['twitter_id'] = $user->id;
+            
+            $userModel = new User;
+            $createdUser = $userModel->addNew($create);
+            Auth::loginUsingId($createdUser->id);
+            return redirect()->route('home');
+        } catch (Exception $e) {
+            return redirect('auth/twitter');
+        }*/
+        return view('welcome', [
+            
         ]);
     }
 }

@@ -42,11 +42,21 @@
                                     </td>
                                     <td data-th="Subtotal" class="text-center">{{ $item->price }}</td>
                                     <td class="actions" data-th="">
-                                        {{ Form::submit('Actualizar', array('class' => 'btn btn-info btn-sm')) }}
+                                            <form action="{{ url('/user/update_usercart/'.$item->rowId) }}" method="GET" style="display: inline-block">
+                                                <button type="submit" id="update-disc-item-{{ $item->id }}" class="btn btn-primary btn-mini">
+                                                    <i class="fa fa-refresh"></i>
+                                                </button>
+                                            </form>
+                                            <form action="{{ url('/user/remove_usercart_item/'.$item->rowId) }}" method="GET" style="display: inline-block">
+                                                <button type="submit" id="remove-disc-item-{{ $item->id }}" class="btn btn-danger btn-mini">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </button>
+                                            </form>
+                                        <!-- {{ Form::submit('Actualizar', array('class' => 'btn btn-info btn-sm')) }} -->
                                         <!-- <button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button> -->
                                         <!-- {!! Html::linkAction('UserController@update_usercart', 'Actualizar', array($item->rowId, 1), array('class' => 'btn btn-info btn-sm')) !!}-->
                                         <!-- <button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button> -->
-                                        {!! Html::linkAction('UserController@remove_usercart_item', 'Quitar', array($item->rowId), array('class' => 'btn btn-danger btn-sm')) !!}
+                                        <!-- {!! Html::linkAction('UserController@remove_usercart_item', 'Quitar', array($item->rowId), array('class' => 'btn btn-danger btn-sm')) !!}-->
                                     </td>
                                     </form>
                                 </tr>
@@ -54,7 +64,7 @@
                         </tbody>
                         <tfoot>
                             <tr class="visible-xs">
-                                <td class="text-center"><strong>Total 1.99</strong></td>
+                                <td class="text-center"><strong>{{ Cart::subtotal() }}</strong></td>
                             </tr>
                             <tr>
                                 <td><a href="{{ url('discs') }}" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continuar comprando</a></td>

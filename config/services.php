@@ -35,4 +35,16 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'spotify' => [
+        'client_id' => env('SPOTIFY_KEY'),
+        'client_secret' => env('SPOTIFY_SECRET'),
+        'redirect' => env('SPOTIFY_REDIRECT_URI'),  
+    ],
+
+    'twitter' => [
+        'client_id' => 'yinKg5lw1d4RnGuGvgqvvfLwk',
+        'client_secret' => '2o46A5KnyYzZJgVReXOoEEmCoXXOMjOWcLZwQfyl1ClMBtNPUv',
+        'redirect' => 'http://127.0.0.1:8080/proyectotfg/public',
+    ],
+
 ];
