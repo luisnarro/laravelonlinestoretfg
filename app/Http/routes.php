@@ -79,10 +79,25 @@ Route::get('/styles/{id}/discs', [
 	'uses'	=> 'DiscController@discs_by_style'
 ]);
 
-// Twitter OAuth2 login
+// Twitter OAuth login
 
 Route::get('/twitter', function () {
     return view('twitter/twitterAuth');
 });
 Route::get('auth/twitter', 'Auth\AuthController@redirectToTwitter');
 Route::get('auth/twitter/callback', 'Auth\AuthController@handleTwitterCallback');
+
+// Spotify OAuth Login
+
+Route::get('auth/spotify', 'Auth\AuthController@redirectToSpotify');
+Route::get('auth/spotify/callback', 'Auth\AuthController@handleSpotifyCallback');
+
+// Términos de uso y política de privacidad
+Route::get('/terminosdeservicio', function()
+{
+    return view('/legal/servicio');
+});
+Route::get('/politicaprivacidad', function()
+{
+    return view('/legal/privacidad');
+});

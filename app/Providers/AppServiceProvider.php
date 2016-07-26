@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use SpotifyProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $socialite = $this->app->make('Laravel\Socialite\Contracts\Factory');
+        $socialite->extend(
+            'spotify',
+            function ($app) use ($socialite) {
+                $config = $app['config']['services.spotify'];
+                return $socialite->buildProvider(SpotifyProvider::class, $config);
+            }
+        );
     }
 
     /**

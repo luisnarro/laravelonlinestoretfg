@@ -5,11 +5,10 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Bienvenido a la tienda online</div>
+                <div class="panel-heading">Términos de servicio</div>
 
                 <div class="panel-body">
-                    Pagina principal de la tienda online.
-                    {{ dd($user) }}
+                    Términos de servicio de la página web, de la tienda online y de la cuenta de Twitter.
                 </div>
             </div>
         </div>

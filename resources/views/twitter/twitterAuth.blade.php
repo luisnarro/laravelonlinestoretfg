@@ -63,6 +63,13 @@
                             </a>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12 row-block">
+                            <a href="{{ url('auth/spotify') }}" class="btn btn-lg btn-success btn-block">
+                                <strong>Login With Spotify</strong>
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <div class="or-box row-block">
                     <div class="row">

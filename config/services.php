@@ -36,15 +36,15 @@ return [
     ],
 
     'spotify' => [
-        'client_id' => env('SPOTIFY_KEY'),
-        'client_secret' => env('SPOTIFY_SECRET'),
-        'redirect' => env('SPOTIFY_REDIRECT_URI'),  
+        'client_id' => '1dc1b1957b9749798ccb2443391ba56b',
+        'client_secret' => '4830497131824174b89c851896eb6788',
+        'redirect' => 'http://www.localhost:8080/proyectotfg/public/auth/spotify/callback',  
     ],
 
     'twitter' => [
         'client_id' => 'yinKg5lw1d4RnGuGvgqvvfLwk',
         'client_secret' => '2o46A5KnyYzZJgVReXOoEEmCoXXOMjOWcLZwQfyl1ClMBtNPUv',
-        'redirect' => 'http://127.0.0.1:8080/proyectotfg/public',
+        'redirect' => 'http://localhost:8080/proyectotfg/public/auth/twitter/callback',
     ],
 
 ];

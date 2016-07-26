@@ -19,7 +19,7 @@ class DiscController extends Controller
     public function __construct(Disc $discs)
     {
     	//$this->middleware('auth');
-        $this->middleware('auth', ['except' => ['index', 'discs_by_style']]);
+        $this->middleware('auth', ['except' => ['index', 'discs_by_style', 'discos_formato']]);
 
         $this->discs = $discs;
     }
