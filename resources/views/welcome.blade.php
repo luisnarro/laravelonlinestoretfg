@@ -9,7 +9,6 @@
 
                 <div class="panel-body">
                     Pagina principal de la tienda online.
-                    {{ dd($user) }}
                 </div>
             </div>
         </div>

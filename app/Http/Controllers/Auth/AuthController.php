@@ -90,12 +90,12 @@ class AuthController extends Controller
             
             $create['name'] = $user->name;
             $create['email'] = $user->email;
+            $create['twitter_id'] = $user->id;
             
             
             $userModel = new User;
-            //$createdUser = $userModel->addNew($create);
-            //Auth::loginUsingId($createdUser->id);
-            //return redirect()->route('home');*/
+            $createdUser = $userModel->addNew($create);
+            Auth::loginUsingId($createdUser->id);
 
             return view('welcome', [
                 'user' => $user,
@@ -103,7 +103,7 @@ class AuthController extends Controller
 
             
         } catch (Exception $e) {
-            //return redirect('auth/twitter');
+            return redirect('auth/twitter');
         }
        
     }
@@ -127,6 +127,8 @@ class AuthController extends Controller
             $request->session()->put('state',$state);
             $user = Socialite::driver('spotify')->user();
             
+            var_dump($user);
+
             //$create['name'] = $user->name;
             //$create['email'] = $user->email;
             

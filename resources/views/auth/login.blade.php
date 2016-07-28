@@ -56,6 +56,20 @@
 
                                 <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
                             </div>
+                            <div class="col-md-6 col-md-offset-4">
+                                <a href="{{ url('auth/twitter') }}" class="btn btn-primary btn-twitter">
+                                    <span class="fa fa-twitter"></span>
+                                    Sign in with Twitter
+                                </a>
+                            </div>
+                            <!--
+                            <div class="col-md-6 col-md-offset-4">
+                                <a href="{{ url('auth/spotify') }}" class="btn btn-success onl_btn-spotify">
+                                    <span class="fa fa-spotify"></span>
+                                    Sign in with Spotify
+                                </a>
+                            </div>
+                            -->
                         </div>
                     </form>
                 </div>
