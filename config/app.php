@@ -150,7 +150,6 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         SocialiteProviders\Manager\ServiceProvider::class,
-
         /*
          * Application Service Providers...
          */

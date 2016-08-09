@@ -101,3 +101,10 @@ Route::get('/politicaprivacidad', function()
 {
     return view('/legal/privacidad');
 });
+
+// BACKEND
+Route::get('/admin', [
+	'middleware' => 'auth',
+	'as'	=> 'user.admin',
+	'uses'	=> 'UserController@admin'
+]);

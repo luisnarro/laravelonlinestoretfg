@@ -36,6 +36,7 @@ class UserController extends Controller
         /* Cart::instance('newInstance');
         Cart::add('293ad', 'Product 1', 1, 9.99);
         Cart::store('12345678'); */
+
         $prueba = Cart::content();
         return view('home', [
             
@@ -109,6 +110,16 @@ class UserController extends Controller
     public function validate_checkout(Request $request)
     {
         
+    }
+
+    public function admin(Request $request)
+    {
+
+        // Si el usuario es administrador.
+        
+        return view('home', [
+            
+        ]);
     }
 
 

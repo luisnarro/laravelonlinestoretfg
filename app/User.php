@@ -7,6 +7,8 @@ use DB;
 
 class User extends Authenticatable
 {
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -25,6 +27,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
     public function addNew($input)
     {
         $check = static::where('email',$input['email'])->first();
@@ -37,6 +40,40 @@ class User extends Authenticatable
         }
 
         return $check;
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role', 'user_role', 'user_id', 'role_id');
+    }
+
+    public function hasAnyRole($roles)
+    {
+        if (is_array($roles))
+        {
+            foreach ($roles as $role) {
+                if ($this->hasRole($role))
+                {
+                    return true;
+                }
+            }
+        }else
+        {
+            if ($this->hasRole($roles))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private function hasRole($role)
+    {
+        if ($this->roles()->where('name', $role)->first())
+        {
+            return true;
+        }
+        return false;
     }
 
     /*
