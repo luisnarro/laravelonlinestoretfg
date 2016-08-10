@@ -106,5 +106,7 @@ Route::get('/politicaprivacidad', function()
 Route::get('/admin', [
 	'middleware' => 'auth',
 	'as'	=> 'user.admin',
-	'uses'	=> 'UserController@admin'
+	'uses'	=> 'UserController@admin',
+	'middleware' => 'roles',
+	'roles' => ['Admin', 'Employee']
 ]);

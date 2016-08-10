@@ -117,7 +117,7 @@ class UserController extends Controller
 
         // Si el usuario es administrador.
         
-        return view('home', [
+        return view('backend/shop_backend', [
             
         ]);
     }

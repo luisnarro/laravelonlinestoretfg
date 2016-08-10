@@ -19,10 +19,10 @@ class CheckRole
         {
             return response("No tiene permisos suficientes para estar aquí.", 401);
         }
-
+        
         $actions = $request->route()->getAction();
         $roles = isset($actions['roles']) ? $actions['roles'] : null;
-
+        
         if ($request->user()->hasAnyRole($roles) || !$roles){
             return $next($request);
         }
