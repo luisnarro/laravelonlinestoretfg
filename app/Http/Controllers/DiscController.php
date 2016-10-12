@@ -90,7 +90,14 @@ class DiscController extends Controller
 
     	$request->user()->discs()->create([
     		'name' => $request->name,
+            'year' => $request->year,
+            'format' => $request->format,
+            'image' => $request->image,
     		]);
+        
+
+        //artista
+        //grupo
 
     	return redirect('/discs');
     }

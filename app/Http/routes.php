@@ -104,9 +104,8 @@ Route::get('/politicaprivacidad', function()
 
 // BACKEND
 Route::get('/admin', [
-	'middleware' => 'auth',
 	'as'	=> 'user.admin',
 	'uses'	=> 'UserController@admin',
-	'middleware' => 'roles',
+	'middleware' => ['auth', 'roles'],
 	'roles' => ['Admin', 'Employee']
 ]);

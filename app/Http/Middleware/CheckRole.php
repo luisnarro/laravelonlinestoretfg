@@ -17,7 +17,9 @@ class CheckRole
     {
         if ($request->user() === null)
         {
-            return response("No tiene permisos suficientes para estar aquí.", 401);
+            //return response("No tiene permisos suficientes para estar aquí.", 401);
+            //return view('errors/not_authorized', []);
+            return redirect()->back();
         }
         
         $actions = $request->route()->getAction();
@@ -26,6 +28,8 @@ class CheckRole
         if ($request->user()->hasAnyRole($roles) || !$roles){
             return $next($request);
         }
-        return response("No tiene permisos suficientes para estar aquí.", 401);
+        //return response("No tiene permisos suficientes para estar aquí.", 401);
+        //return view('errors/not_authorized', []);
+        return redirect()->back();
     }
 }
