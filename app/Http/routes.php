@@ -109,3 +109,17 @@ Route::get('/admin', [
 	'middleware' => ['auth', 'roles'],
 	'roles' => ['Admin', 'Employee']
 ]);
+
+	// Scrapping LASTFM
+Route::get('/admin/albumsbytag', [
+	'as'	=> 'albumsbytag',
+	'uses'	=> 'LastfmscrappingController@albumsbytag',
+	'middleware' => ['auth', 'roles'],
+	'roles' => ['Admin', 'Employee']
+]);
+Route::get('/admin/addalbum', [
+	'as'	=> 'addalbum',
+	'uses'	=> 'LastfmscrappingController@addalbum',
+	'middleware' => ['auth', 'roles'],
+	'roles' => ['Admin', 'Employee']
+]);

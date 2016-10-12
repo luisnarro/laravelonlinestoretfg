@@ -17,7 +17,7 @@
                 <div class="panel-body">
                     <h3>Top Albums por Tag:</h3>
 
-                    <form action="#" method="post">
+                    <form action="{{ url('admin/albumsbytag') }}" method="GET">
                         <label>Tag:</label>
                         <select name="tag">
                             <option value="disco">Disco</option>
@@ -30,28 +30,41 @@
                     </form>
                     </br>
 
-                    <?php
-                        if(isset($_POST['tag'])){
-                            $url="http://ws.audioscrobbler.com/2.0/?method=tag.gettopalbums&tag=".$_POST['tag']."&limit=10&api_key=31b17cdc13c44d7b1f8d7bd80afa6b14";
-                            $ch = curl_init();
-                            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                            curl_setopt($ch, CURLOPT_URL, $url);    // get the url contents
+                    @if (!empty($data))
+                        <table id="cart" class="table table-striped disc-table">
+                        <thead>
+                            <tr>
+                                <th>Album</th>
+                                <th>Artista</th>
+                                <th>Portada</th>
+                                <th>Información</th>
+                                <th>Añadir album</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                            $data = curl_exec($ch); // execute curl request
-                            curl_close($ch);
-
-                            $xml = simplexml_load_string($data);
-                            $albums = $xml->albums[0];
-
-                            foreach ($albums as $attr => $valor){
-                                ?>
-                                    <a href=<?php echo ($valor->url); ?>><?php echo ($valor->name); ?></a></br>
-                                    <img src=<?php echo ($valor->image[2]); ?> alt=<?php echo ($valor->name); ?>>
-                                    </br>
-                                <?php 
-                            }
-                        }
-                    ?>
+                        @foreach ($data as $album)
+                            <tr>
+                                <td data-th="table-text">
+                                    <div>{{ $album->name }}</div>
+                                </td>
+                                <td>
+                                    <div>{{ $album->artist->name }}</div>
+                                </td>  
+                                <td>
+                                    <div><img src="{{ $album->image[2] }}" alt="{{ $album->name }}" height="50" width="50"></div>
+                                </td>
+                                <td>
+                                    <div><a href="{{ $album->url }}" target="_blank">Más Info</a></div>
+                                </td>
+                                <td>
+                                    <a href="{{ url('admin/addalbum') }}" class="btn btn-success btn-block">Añadir a la tienda</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                            </tbody>
+                        </table>
+                    @endif
                 </div>
             </div>
         </div>
