@@ -58,7 +58,7 @@
                                     <div><a href="{{ $album->url }}" target="_blank">Más Info</a></div>
                                 </td>
                                 <td>
-                                    <a href="{{ url('admin/addalbum') }}" class="btn btn-success btn-block">Añadir a la tienda</a>
+                                    <a href="{{ action('LastfmscrappingController@addalbum', ['albumname' => $album->name, 'artistname' => $album->artist->name]) }}" class="btn btn-success btn-block">Añadir a la tienda</a>
                                 </td>
                             </tr>
                         @endforeach

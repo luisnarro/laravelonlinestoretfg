@@ -51,9 +51,11 @@ class LastfmscrappingController extends Controller
         return view('backend/shop_backend', ['data' => $albums]);
     }
 
-    public function addalbum(Request $request)
+    public function addalbum(Request $request, $albumname, $artistname)
     {
-        
+        //comprobar si existe en la BBDD antes
+
+        return view('home', ['data' => $albumname]);
     }
 }
 
