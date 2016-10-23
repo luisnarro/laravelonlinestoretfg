@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use App\Artist;
 use Exception;
 
 class LastFmScrappingArtist
@@ -9,6 +10,7 @@ class LastFmScrappingArtist
     public $name;
     public $mbid;
     public $bio;
+    public $artistInstance;
     private static $instance = null;
 
     private function __construct($xmlInfo)
@@ -50,5 +52,25 @@ class LastFmScrappingArtist
         }
 
         return $result;
+    }
+
+    public function checkArtistIsAdded()
+    {
+        if(!is_null($this->mbid))
+        {
+            $this->artistInstance = Artist::where('mbid', '=', $this->mbid)->first();
+        }else
+        {
+            $this->artistInstance = Artist::where('name', '=', $this->name)->first();
+        }
+        return !is_null($tis->discInstance);
+    }
+
+    public function addToDatabase()
+    {
+    	$artist = new Artist;
+    	$artist->name = $this->name;
+    	$artist->bio = $this->bio;
+    	$artist->save();
     }
 }

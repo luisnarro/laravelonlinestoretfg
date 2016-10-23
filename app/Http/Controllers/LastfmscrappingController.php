@@ -54,18 +54,9 @@ class LastfmscrappingController extends Controller
 
     public function addalbum(Request $request, $albumname, $artistname)
     {
-        $url="http://ws.audioscrobbler.com/2.0/?method=album.getinfo&artist=".urlencode($artistname)."&album=".urlencode($albumname)."&api_key=31b17cdc13c44d7b1f8d7bd80afa6b14";
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_URL, $url);
-
-        $data = curl_exec($ch);
-        curl_close($ch);
-        $xmlAlbum = simplexml_load_string($data);
-
         $albumInfo = null;
         $artist = null;
-        $album = LastFmScrappingAlbum::loadXML($xmlAlbum);
+        $album = LastFmScrappingAlbum::getAlbumInfo($artistname, $albumname);
 
         if ($album != null)
         {
@@ -83,37 +74,18 @@ class LastfmscrappingController extends Controller
                 curl_close($ch);
                 $xmlArtist = simplexml_load_string($data);
                 $artist = LastFmScrappingArtist::loadXML($xmlArtist);
-                
-                // Comprobar si el artista está en la BBDD
+                var_dump($artist);
+                $artist->addToDatabase();
+
+                /*if (!$artist->checkArtistIsAdded) 
+                {
+                    $artist->addToDatabase();
+                }*/
 
                 $albumInfo = array($album->name, $album->mbid, $album->year, $album->nsongs, $album->totalDuration, $album->artist_name, $album->mbid, $artist->mbid);
             //}
         }
 
         return view('backend/shop_backend_addAlbumReview', ['albumData' => $albumInfo]);
-    }
-
-    private function checkArtistExist($artists_mbid)
-    {
-        if (Arist::where('mbid', '=', $artists_mbid)->count() > 0) {
-           // user found
-        }
-    }
-
-    private function getArtistInfo($artist_name)
-    {
-        $url="http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=".$artist_name."&api_key=31b17cdc13c44d7b1f8d7bd80afa6b14";
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_URL, $url);    // get the url contents
-
-        $data = curl_exec($ch); // execute curl request
-        curl_close($ch);
-
-        $xml = simplexml_load_string($data);
-
-        var_dump($xml);
-
-        return;
     }
 }
