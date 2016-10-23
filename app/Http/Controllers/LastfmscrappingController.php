@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\LastFmScrappingAlbum;
+use App\LastFmScrappingArtist;
 use App\Http\Requests;
 
 class LastfmscrappingController extends Controller
@@ -53,8 +54,6 @@ class LastfmscrappingController extends Controller
 
     public function addalbum(Request $request, $albumname, $artistname)
     {
-        // TO-DO comprobar si existe en la BBDD antes
-
         $url="http://ws.audioscrobbler.com/2.0/?method=album.getinfo&artist=".urlencode($artistname)."&album=".urlencode($albumname)."&api_key=31b17cdc13c44d7b1f8d7bd80afa6b14";
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -62,14 +61,33 @@ class LastfmscrappingController extends Controller
 
         $data = curl_exec($ch);
         curl_close($ch);
-        $xml = simplexml_load_string($data);
+        $xmlAlbum = simplexml_load_string($data);
 
         $albumInfo = null;
-        $album = LastFmScrappingAlbum::loadXML($xml);
+        $artist = null;
+        $album = LastFmScrappingAlbum::loadXML($xmlAlbum);
 
         if ($album != null)
         {
-            $albumInfo = array($album->name, $album->mbid, $album->year, $album->nsongs, $album->totalDuration, $album->artist_name, $album->mbid);
+            /*if($album->checkAlbumIsAdded())
+            {
+                // El disco se encuentra en la BBDD (en la tienda)
+            }else
+            {*/
+                $url="http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=".urlencode($album->artist_name)."&api_key=31b17cdc13c44d7b1f8d7bd80afa6b14";
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($ch, CURLOPT_URL, $url);
+
+                $data = curl_exec($ch);
+                curl_close($ch);
+                $xmlArtist = simplexml_load_string($data);
+                $artist = LastFmScrappingArtist::loadXML($xmlArtist);
+                
+                // Comprobar si el artista está en la BBDD
+
+                $albumInfo = array($album->name, $album->mbid, $album->year, $album->nsongs, $album->totalDuration, $album->artist_name, $album->mbid, $artist->mbid);
+            //}
         }
 
         return view('backend/shop_backend_addAlbumReview', ['albumData' => $albumInfo]);

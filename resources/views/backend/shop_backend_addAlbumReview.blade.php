@@ -23,7 +23,7 @@
                             <label>Artista:</label>
                             <input type="text" value="{{ $albumData[5] }}"></br>
                             <label>Id Artista LastFM:</label>
-                            <input type="text"></br>
+                            <input type="text" value="{{ $albumData[7] }}"></br>
                             <label>Id Album LastFM:</label>
                             <input type="text" value="{{ $albumData[6] }}"></br>
                             <br><br>

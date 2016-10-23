@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use Disc;
 use Exception;
 
 class LastFmScrappingAlbum
@@ -14,6 +15,7 @@ class LastFmScrappingAlbum
     public $nsongs;
     public $totalDuration;
     public $artist_name;
+    public $discInstance;
     private static $instance = null;
 
     private function __construct($xmlInfo)
@@ -71,5 +73,17 @@ class LastFmScrappingAlbum
         $result = $result/60;
 
         return $result;
+    }
+
+    public function checkAlbumIsAdded()
+    {
+        if(!is_null($this->mbid))
+        {
+            $this->discInstance = Disc::where('mbid', '=', $this->mbid)->first();
+        }else
+        {
+            $this->discInstance = Disc::where('title', '=', $this->name)->first();
+        }
+        return !is_null($tis->discInstance);
     }
 }
