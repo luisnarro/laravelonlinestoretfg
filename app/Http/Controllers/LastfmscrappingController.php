@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\LastFmScrappingAlbum;
 use App\Http\Requests;
 
 class LastfmscrappingController extends Controller
@@ -53,9 +53,49 @@ class LastfmscrappingController extends Controller
 
     public function addalbum(Request $request, $albumname, $artistname)
     {
-        //comprobar si existe en la BBDD antes
+        // TO-DO comprobar si existe en la BBDD antes
 
-        return view('home', ['data' => $albumname]);
+        $url="http://ws.audioscrobbler.com/2.0/?method=album.getinfo&artist=".urlencode($artistname)."&album=".urlencode($albumname)."&api_key=31b17cdc13c44d7b1f8d7bd80afa6b14";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_URL, $url);
+
+        $data = curl_exec($ch);
+        curl_close($ch);
+        $xml = simplexml_load_string($data);
+
+        $albumInfo = null;
+        $album = LastFmScrappingAlbum::loadXML($xml);
+
+        if ($album != null)
+        {
+            $albumInfo = array($album->name, $album->mbid, $album->year, $album->nsongs, $album->totalDuration, $album->artist_name, $album->mbid);
+        }
+
+        return view('backend/shop_backend_addAlbumReview', ['albumData' => $albumInfo]);
+    }
+
+    private function checkArtistExist($artists_mbid)
+    {
+        if (Arist::where('mbid', '=', $artists_mbid)->count() > 0) {
+           // user found
+        }
+    }
+
+    private function getArtistInfo($artist_name)
+    {
+        $url="http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=".$artist_name."&api_key=31b17cdc13c44d7b1f8d7bd80afa6b14";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_URL, $url);    // get the url contents
+
+        $data = curl_exec($ch); // execute curl request
+        curl_close($ch);
+
+        $xml = simplexml_load_string($data);
+
+        var_dump($xml);
+
+        return;
     }
 }
-
