@@ -89,8 +89,8 @@ Route::get('auth/twitter/callback', 'Auth\AuthController@handleTwitterCallback')
 
 // Spotify OAuth Login
 
-//Route::get('auth/spotify', 'Auth\AuthController@redirectToSpotify');
-//Route::get('auth/spotify/callback', 'Auth\AuthController@handleSpotifyCallback');
+Route::get('auth/spotify', 'Auth\AuthController@redirectToSpotify');
+Route::get('auth/spotify/callback', 'Auth\AuthController@handleSpotifyCallback');
 
 // Términos de uso y política de privacidad
 Route::get('/terminosdeservicio', function()
@@ -120,6 +120,12 @@ Route::get('/admin/albumsbytag', [
 Route::get('/admin/addalbum/{albumname}/{artistname}', [
 	'as'	=> 'admin.addalbum',
 	'uses'	=> 'LastfmscrappingController@addalbum',
+	'middleware' => ['auth', 'roles'],
+	'roles' => ['Admin', 'Employee']
+]);
+Route::get('/admin/addalbumtodb', [
+	'as'	=> 'admin.addalbumtodb',
+	'uses'	=> 'LastfmscrappingController@addalbumtodb',
 	'middleware' => ['auth', 'roles'],
 	'roles' => ['Admin', 'Employee']
 ]);

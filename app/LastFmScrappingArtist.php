@@ -58,19 +58,24 @@ class LastFmScrappingArtist
     {
         if(!is_null($this->mbid))
         {
-            $this->artistInstance = Artist::where('mbid', '=', $this->mbid)->first();
+            $this->artistInstance = Artist::where('lastfm_id', '=', $this->mbid)->first();
         }else
         {
             $this->artistInstance = Artist::where('name', '=', $this->name)->first();
         }
-        return !is_null($tis->discInstance);
+        return !is_null($this->artistInstance);
     }
 
     public function addToDatabase()
     {
-    	$artist = new Artist;
-    	$artist->name = $this->name;
-    	$artist->bio = $this->bio;
-    	$artist->save();
+        if(!$this->checkArtistIsAdded())
+        {
+            $artist = new Artist;
+            $artist->name = $this->name;
+            $artist->bio = $this->bio;
+            $artist->lastfm_id = $this->mbid;
+            $artist->save();
+        }
+    	
     }
 }

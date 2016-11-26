@@ -25,6 +25,11 @@ class Disc extends Model implements Buyable
         return $this->belongsToMany('App\Style', 'disc_to_style', 'disc_id', 'style_id');
     }
 
+    public function addNew($input)
+    {
+        
+    }
+
     /*
     * Métodos de la interfaz "Buyable"
     */

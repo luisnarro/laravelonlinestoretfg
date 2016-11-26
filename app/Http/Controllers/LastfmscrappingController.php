@@ -74,7 +74,7 @@ class LastfmscrappingController extends Controller
                 curl_close($ch);
                 $xmlArtist = simplexml_load_string($data);
                 $artist = LastFmScrappingArtist::loadXML($xmlArtist);
-                var_dump($artist);
+                //var_dump($artist);
                 $artist->addToDatabase();
 
                 /*if (!$artist->checkArtistIsAdded) 
@@ -86,6 +86,19 @@ class LastfmscrappingController extends Controller
             //}
         }
 
+        $album->artist_id = $artist->mbid;
+        session()->put('albumtoadd', $album);
+
         return view('backend/shop_backend_addAlbumReview', ['albumData' => $albumInfo]);
+    }
+
+    public function addalbumtodb(Request $request)
+    {
+        $album = session()->get('albumtoadd');
+        if(!is_null($album)){
+            if(is_null($album->year)){ $album->year = $request->anio;}
+            //var_dump($album);
+            $album->addToDatabase();
+        }
     }
 }

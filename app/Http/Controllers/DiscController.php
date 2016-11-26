@@ -30,9 +30,7 @@ class DiscController extends Controller
 
         $discList = Disc::all();
 
-        $discList = $this->get_disc_info($discList);
-
-        
+        $discList = $this->get_disc_info($discList);            
 
         return view('discs.index', [
             'discs' => $discList,
@@ -67,13 +65,17 @@ class DiscController extends Controller
     private function get_disc_info($discList)
     {
         foreach ($discList as $disc) {
-            $groups = Disc::find($disc->id)->group_list()->get();
+            //$groups = Disc::find($disc->id)->group_list()->get();
+            $artist = Disc::find($disc->id)->artist_list()->get();
+            $disc['artist'] = $artist;
             
+            /*
             foreach ($groups as $group) {
                 $group['artists'] = $group->artist_list()->get();
             }
+            */
 
-            $disc['groups'] = $groups;
+            //$disc['groups'] = $groups;
             $disc['styles'] = Disc::find($disc->id)->style_list()->get();
         }
 

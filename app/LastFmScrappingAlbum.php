@@ -1,7 +1,9 @@
 <?php
 
 namespace App;
-use Disc;
+use App\Disc;
+use App\Artist;
+use Illuminate\Support\Facades\DB;
 use Exception;
 
 class LastFmScrappingAlbum
@@ -15,6 +17,8 @@ class LastFmScrappingAlbum
     public $nsongs;
     public $totalDuration;
     public $artist_name;
+    public $artist_id;
+    public $tags = array();
     public $discInstance;
     private static $instance = null;
 
@@ -30,6 +34,8 @@ class LastFmScrappingAlbum
         $this->nsongs = count($this->checkAttributeExists($xmlInfo->album->tracks->track));
         $this->totalDuration = $this->calculateDuration($this->checkAttributeExists($xmlInfo->album->tracks->track));
         $this->artist_name = $this->checkParameter($xmlInfo->album->artist);
+        $this->settags($xmlInfo->album->tags);
+
     }
 
     public static function getAlbumInfo($artistname, $albumname)
@@ -89,11 +95,47 @@ class LastFmScrappingAlbum
     {
         if(!is_null($this->mbid))
         {
-            $this->discInstance = Disc::where('mbid', '=', $this->mbid)->first();
+            $this->discInstance = Disc::where('lastfm_id', '=', $this->mbid)->first();
         }else
         {
-            $this->discInstance = Disc::where('title', '=', $this->name)->first();
+            $this->discInstance = Disc::where('name', '=', $this->name)->first();
         }
-        return !is_null($tis->discInstance);
+        return !is_null($this->discInstance);
+    }
+
+    private function settags($taglist)
+    {
+        foreach ($taglist->tag as $tag) {
+            $tagname = (string)$tag->name;
+            array_push($this->tags, $tagname);
+            $style = Style::firstOrCreate(['name' => $tagname]);
+        }
+    }
+
+    public function addToDatabase()
+    {
+        if(!$this->checkAlbumIsAdded())
+        {
+            //recuperar el id de la bbdd del artista a partir del mbid
+            $artist = Artist::where('lastfm_id', '=', $this->artist_id)->first();
+
+            $album = new Disc;
+            $album->name = $this->name;
+            $album->year = $this->year;
+            $album->lastfm_id = $this->mbid;
+            $album->format = 1;
+            $album->nsongs = $this->nsongs;
+            $album->totalduration = $this->totalDuration;
+            $album->artist_id = $artist->id;
+            
+            $album->save();
+            $addedAlbum = Disc::where('lastfm_id', '=', $this->mbid)->first();
+            $artist->disc_list()->attach($addedAlbum->id);
+            foreach ($this->tags as $tag) {
+                $style = Style::where('name', '=', $tag)->first();
+                $addedAlbum->style_list()->attach($style->id);
+            }
+            //$addedAlbum->style_list()->attach($style->id);
+        }
     }
 }

@@ -17,8 +17,9 @@
                         <thead>
                             <th>Discos</th>
                             <th>&nbsp;</th>
+                            <!--<th>Artista</th>-->
                             <th>Artista</th>
-                            <th>Grupo</th>
+                            <!--<th>Grupo</th>-->
                             <th>Estilos</th>
                             <th>&nbsp;</th>
                         </thead>
@@ -46,15 +47,13 @@
                                         <div><img src="{{ url('/').$disc->img_path }}" alt="{{ $disc->name }}" height="50" width="50"></div>
                                     </td>
 
-                                    <td>
-                                        <div>{!! Html::linkAction('ArtistController@artistInfo', $disc->groups->first()->artists->first()->name, array($disc->groups->first()->artists->first()->id)) !!} </div>
-                                    </td>
+                                   
 
                                     <td>
-                                        <div>
-                                            {!! Html::linkAction('GroupController@groupInfo', $disc->groups->first()->name, array($disc->groups->first()->id)) !!}
-                                        </div>
+                                        <div>{!! Html::linkAction('ArtistController@artistInfo', $disc->artist->first()->name, array($disc->artist->first()->id)) !!}</div>
                                     </td>
+
+                                  
                                     <td>
                                         <div class="dropdown">
                                             <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Estilos
