@@ -19,6 +19,7 @@ class LastFmScrappingAlbum
     public $artist_name;
     public $artist_id;
     public $tags = array();
+    public $imgpath;
     public $discInstance;
     private static $instance = null;
 
@@ -35,6 +36,8 @@ class LastFmScrappingAlbum
         $this->totalDuration = $this->calculateDuration($this->checkAttributeExists($xmlInfo->album->tracks->track));
         $this->artist_name = $this->checkParameter($xmlInfo->album->artist);
         $this->settags($xmlInfo->album->tags);
+        $this->imgpath = '/images'.'/'.$this->mbid.'.png';
+        $this->save_image($this->checkParameter($xmlInfo->album->image[2]),'C:/xampp/htdocs/proyectotfg/public/images/'.$this->mbid.'.png');
 
     }
 
@@ -112,6 +115,19 @@ class LastFmScrappingAlbum
         }
     }
 
+    private function save_image($inPath,$outPath)
+    {
+        $arrContextOptions=array(
+            "ssl"=>array(
+                "verify_peer"=>false,
+                "verify_peer_name"=>false,
+            ),
+        ); 
+
+        $contents=file_get_contents($inPath, false, stream_context_create($arrContextOptions));
+        file_put_contents($outPath,$contents);
+    }
+
     public function addToDatabase()
     {
         if(!$this->checkAlbumIsAdded())
@@ -127,6 +143,7 @@ class LastFmScrappingAlbum
             $album->nsongs = $this->nsongs;
             $album->totalduration = $this->totalDuration;
             $album->artist_id = $artist->id;
+            $album->img_path = $this->imgpath;
             
             $album->save();
             $addedAlbum = Disc::where('lastfm_id', '=', $this->mbid)->first();
