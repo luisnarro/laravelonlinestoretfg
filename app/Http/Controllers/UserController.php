@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Disc;
+use App\RecomendationIn;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -29,6 +30,9 @@ class UserController extends Controller
         $this->usercart = Cart::instance('shoppingcart'.strval(Auth::user()->id))->content();
         Cart::store(strval(Auth::user()->id));
 
+        // Se realiza la petición al sistema de recomendación.
+        RecomendationIn::request_rec_system(Auth::user()->id);
+
     }
 
     public function index(Request $request)
@@ -39,7 +43,7 @@ class UserController extends Controller
 
         $prueba = Cart::content();
         return view('home', [
-            
+           
         ]);
     }
 
@@ -55,6 +59,10 @@ class UserController extends Controller
             $this->usercart = Cart::instance('shoppingcart'.strval(Auth::user()->id));
             $cartItem = $this->usercart->add($disc);
             Cart::store(strval(Auth::user()->id));
+
+            //Insertar el disco añadido en el carro en la tabla "recomendations_in"
+            RecomendationIn::set_user_discs(strval(Auth::user()->id), $disc_id);
+
         
         //$carro = Cart::content();
 

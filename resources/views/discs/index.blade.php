@@ -86,12 +86,10 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <p>Para obtener recomendacioes personalizadas regístrate e inicia sesión en nuestro sitio </br>
-                            Nuestro sistema de recomendación te mostrará discos basados en tus gustos.
+                            Nuestro sistema de recomendación te mostrará discos basados en tus gustos en tu zona personal.
                         </p>
                     </div>
                 </div>
-            @else
-                @include('layouts.recomendaciones')
             @endif
         @endif
     </div>  
