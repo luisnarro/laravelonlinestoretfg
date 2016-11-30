@@ -32,6 +32,25 @@ class LastFmScrappingArtist
 	    }
     }
 
+    public static function getArtistInfo($artistname)
+    {
+        $url="http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=".urlencode($artistname)."&api_key=31b17cdc13c44d7b1f8d7bd80afa6b14";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_URL, $url);
+
+        $data = curl_exec($ch);
+        curl_close($ch);
+        $xmlArtist = simplexml_load_string($data);
+
+        try {
+            self::$instance = new LastFmScrappingArtist($xmlArtist);
+            return self::$instance;
+        } catch (Exception $unfe) {
+            return null;
+        }
+    }
+
     private function checkAttributeExists($attribute)
     {
         $result = null;

@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Repositories\DiscRepository;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class DiscController extends Controller
 {
@@ -19,7 +21,7 @@ class DiscController extends Controller
     public function __construct(Disc $discs)
     {
     	//$this->middleware('auth');
-        $this->middleware('auth', ['except' => ['index', 'discs_by_style', 'discos_formato']]);
+        $this->middleware('auth', ['except' => ['index', 'discs_by_style', 'discos_formato', 'discs_details']]);
 
         $this->discs = $discs;
     }
@@ -27,11 +29,14 @@ class DiscController extends Controller
     // Lista los últimos discos incorporados
     public function index(Request $request)
     {
-
+        //$perPage = 5;
+        //$currentPage = LengthAwarePaginator::resolveCurrentPage();
         $discList = Disc::all();
 
         $discList = $this->get_disc_info($discList);            
-
+        //$col = new Collection($discList);
+        //$currentPageSearchResults = $col->slice(($currentPage - 1) * $perPage, $perPage)->all();
+        //$discList = new LengthAwarePaginator($currentPageSearchResults, count($col), $perPage);
         return view('discs.index', [
             'discs' => $discList,
         ]);
@@ -59,6 +64,16 @@ class DiscController extends Controller
 
         return view('discs.index', [
             'discs' => $discList,
+        ]);
+    }
+
+    public function discs_details(Request $request, $id)
+    {
+        $disc = Disc::where('id', $id)->get()->first();
+        $disc['artist'] = Disc::find($disc->id)->artist_list()->get();
+        $disc['styles'] = Disc::find($disc->id)->style_list()->get();
+        return view('discs.detail', [
+            'disc' => $disc,
         ]);
     }
 

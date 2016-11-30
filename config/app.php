@@ -208,6 +208,7 @@ return [
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'SpotifyProvider' => Laravel\Socialite\Two\SpotifyProvider::class,
+        'Input' => Illuminate\Support\Facades\Input::class,
 
     ],
 

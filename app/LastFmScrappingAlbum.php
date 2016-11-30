@@ -137,9 +137,17 @@ class LastFmScrappingAlbum
 
             $album = new Disc;
             $album->name = $this->name;
-            $album->year = $this->year;
-            $album->lastfm_id = $this->mbid;
-            $album->format = 1;
+            if($this->year == null)
+            {
+                $album->year = 0;
+            }else
+            {
+                $album->year = $this->year;
+            }
+            if($this->mbid != null)
+            {
+                $album->lastfm_id = $this->mbid;
+                $album->format = 1;
             $album->nsongs = $this->nsongs;
             $album->totalduration = $this->totalDuration;
             $album->artist_id = $artist->id;
@@ -153,6 +161,7 @@ class LastFmScrappingAlbum
                 $addedAlbum->style_list()->attach($style->id);
             }
             //$addedAlbum->style_list()->attach($style->id);
+            }            
         }
     }
 }

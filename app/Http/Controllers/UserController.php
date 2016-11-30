@@ -31,7 +31,7 @@ class UserController extends Controller
         Cart::store(strval(Auth::user()->id));
 
         // Se realiza la petición al sistema de recomendación.
-        RecomendationIn::request_rec_system(Auth::user()->id);
+        
 
     }
 
@@ -40,6 +40,8 @@ class UserController extends Controller
         /* Cart::instance('newInstance');
         Cart::add('293ad', 'Product 1', 1, 9.99);
         Cart::store('12345678'); */
+
+        //RecomendationIn::request_rec_system(Auth::user()->id);
 
         $prueba = Cart::content();
         return view('home', [

@@ -49,9 +49,15 @@ Route::get('/user/remove_usercart_item/{rowId}', [
 ]);
 
 Route::get('/discs', 'DiscController@index');
+
 Route::get('/discs/formato/{id}', [
 	'as'   => 'discs.discos_formato',
 	'uses' =>'DiscController@discos_formato'
+]);
+
+Route::get('/discs/details/{id}', [
+	'as'	=> 'discs.details',
+	'uses'	=>'DiscController@discs_details'
 ]);
 //Route::post('/disc', 'DiscController@store');
 //Route::delete('/disc/{disc}', 'DiscController@destroy');
@@ -110,7 +116,7 @@ Route::get('/admin', [
 	'roles' => ['Admin', 'Employee']
 ]);
 
-	// Scrapping LASTFM
+// Scrapping LASTFM
 Route::get('/admin/albumsbytag', [
 	'as'	=> 'admin.albumsbytag',
 	'uses'	=> 'LastfmscrappingController@albumsbytag',
@@ -129,3 +135,4 @@ Route::get('/admin/addalbumtodb', [
 	'middleware' => ['auth', 'roles'],
 	'roles' => ['Admin', 'Employee']
 ]);
+
