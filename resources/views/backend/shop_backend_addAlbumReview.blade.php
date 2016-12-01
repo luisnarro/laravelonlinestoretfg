@@ -27,15 +27,14 @@
                             <label>Id Album LastFM:</label>
                             <input type="text" name="idalbumfm" value="{{ $albumData[6] }}"></br>
                             <label>Resumen del Album:</label>
-                            <textarea rows="4" cols="50" form="checkform" name="summary">
-                                {{ $albumData[8] }}
-                            </textarea>
+                            <textarea rows="4" cols="50" form="checkform" name="summary">{{ trim($albumData[8], " ") }}</textarea>
                             <br><br>
                             <input type="submit" value="Añadir">
                             <!--<a href="{{ action('LastfmscrappingController@addalbumtodb') }}" class="btn btn-success btn-block">Añadir</a>-->
                         </form>
                     </div>
                 </div>
+                {{var_dump($albumData)}}
             </div>
         </div>
     </div>

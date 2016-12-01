@@ -83,7 +83,7 @@ class LastfmscrappingController extends Controller
                 }*/
 
                 $albumInfo = array($album->name, $album->mbid, $album->year, $album->nsongs,
-                 $album->totalDuration, $album->artist_name, $album->mbid, $artist->mbid, $album->summary);
+                 $album->totalDuration, $album->artist_name, $album->mbid, $artist->mbid, $album->summary, $album->tracklist);
             //}
         }
 

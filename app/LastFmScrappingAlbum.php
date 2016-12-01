@@ -38,7 +38,8 @@ class LastFmScrappingAlbum
         $this->totalDuration = $this->calculateDuration($this->checkAttributeExists($xmlInfo->album->tracks->track));
         $this->artist_name = $this->checkParameter($xmlInfo->album->artist);
         $this->settags($xmlInfo->album->tags);
-        $this->settracks($this->checkAttributeExists($xmlInfo->album->tracks->track));
+        $this->settracks($this->checkAttributeExists($xmlInfo->album->tracks));
+        //$this->tracklist = $this->checkAttributeExists($xmlInfo->album->tracks);
         $this->summary = $this->checkParameter($this->checkAttributeExists($xmlInfo->album->wiki)->summary);
         $this->imgpath = '/images'.'/'.$this->mbid.'.png';
         $this->save_image($this->checkParameter($xmlInfo->album->image[2]),'C:/xampp/htdocs/proyectotfg/public/images/'.$this->mbid.'.png');
@@ -121,12 +122,16 @@ class LastFmScrappingAlbum
 
     private function settracks($tracklist)
     {
-        $trackadd;
-        foreach ($tracklist as $track) {
+        $trackadd = array();
+        foreach ($tracklist->track as $track) {
             $trackadd['name'] = (string)$track->name;
             $trackadd['url'] = (string)$track->url;
             $trackadd['duration'] = (int)$track->duration;
             array_push($this->tracklist, $trackadd);
+            //$track = Track::firstOrCreate(['name' => $track->name]);
+            DB::table('tracks')->insert(
+                ['name' => $trackadd['name'], 'duration' => $trackadd['duration'], 'url' => $trackadd['url']]
+            );
         }
     }
 
@@ -170,11 +175,17 @@ class LastFmScrappingAlbum
             $album->summary = $this->summary;
             
             $album->save();
+            // Añadir comprobación si no existe el mbid del disco, recuperarlo con el "id"
             $addedAlbum = Disc::where('lastfm_id', '=', $this->mbid)->first();
             $artist->disc_list()->attach($addedAlbum->id);
             foreach ($this->tags as $tag) {
                 $style = Style::where('name', '=', $tag)->first();
                 $addedAlbum->style_list()->attach($style->id);
+            }
+
+            foreach ($this->tracklist as $track) {
+                $track = Track::where('name', '=', $track['name'])->first();
+                $addedAlbum->track_list()->attach($track->id);
             }
             //$addedAlbum->style_list()->attach($style->id);
             }            
