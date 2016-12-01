@@ -17,11 +17,13 @@
                 </div>
                 <!--individual product description-->
                 <div class="col-md-8">
-                    <h2 class="text-primary">{{ $disc->name }} </h2>
-
+                    <h2 class="text-primary">{{ $disc->name }} </h2>                    
                     <h4>{{$disc->artist->first()->name}}</h4>
+                    <p>
+                    {{ $disc->artist->first()->bio }}
+                    </p>
                     <div style="font-size: 28px;color: #555555;">7€</div>
-                    <a href="#" class="btn btn-primary btn-lg text-white">Añadir al carro</a>
+                    <a href="{{ url('/user/addtocart/'.$disc->id) }}" class="btn btn-primary btn-lg text-white"><i class="fa fa-shopping-cart"></i> Añadir al carro</a>
                     <h4>Cantidad</h4>
                     <form>
                         <div class="form-group">
@@ -80,18 +82,29 @@
         <!--item desciption end-->
         <!--recently view item-->
         <div class="row">
-            <h2 class="text-primary"> Recomendaciones para tí</h2>
-            <div style="border-bottom:2px solid #418bca;"></div>
-            <div>
-                <figure>
-                    <img src="" alt="product image">
-                    <figcaption>
-                        <h4 class="text-white">Nombre del disco</h4>
-                        <h5 class="text-white">Nombre del artista</h5>
-                    </figcaption>
-                </figure>
-            </div>
+            @if(Auth::guest())
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <p>Para obtener recomendacioes personalizadas regístrate e inicia sesión en nuestro sitio </br>
+                            Nuestro sistema de recomendación te mostrará discos basados en tus gustos en tu zona personal.
+                        </p>
+                    </div>
+                </div>
+            @else
 
+                    <h2 class="text-primary"> Recomendaciones para tí</h2>
+                    <div style="border-bottom:2px solid #418bca;"></div>
+                    <div>
+                        <figure>
+                            <img src="" alt="product image">
+                            <figcaption>
+                                <h4 class="text-white">Nombre del disco</h4>
+                                <h5 class="text-white">Nombre del artista</h5>
+                            </figcaption>
+                        </figure>
+                    </div>
+                
+            @endif
         </div>
         <!--recently view item end-->
     </div>

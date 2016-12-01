@@ -9,7 +9,7 @@
                     <div class="panel-heading">Añadir Disco a la Base de Datos de la tienda</div>
                     <div class="panel-body">
                         Información de lo que se va a añadir.
-                        <form action="{{ url('admin/addalbumtodb') }}" method="GET">
+                        <form id="checkform" action="{{ url('admin/addalbumtodb') }}" method="GET">
                             <!--<label>EAN:</label>
                             <input type="text" ></br>-->
                             <label>Nombre del album:</label>
@@ -26,6 +26,10 @@
                             <input type="text" name="idartistafm" value="{{ $albumData[7] }}"></br>
                             <label>Id Album LastFM:</label>
                             <input type="text" name="idalbumfm" value="{{ $albumData[6] }}"></br>
+                            <label>Resumen del Album:</label>
+                            <textarea rows="4" cols="50" form="checkform" name="summary">
+                                {{ $albumData[8] }}
+                            </textarea>
                             <br><br>
                             <input type="submit" value="Añadir">
                             <!--<a href="{{ action('LastfmscrappingController@addalbumtodb') }}" class="btn btn-success btn-block">Añadir</a>-->
