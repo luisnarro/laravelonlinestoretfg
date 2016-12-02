@@ -81,6 +81,7 @@
                         </tbody>
                         
                     </table>
+                    {{ $discs->links() }}
                 </div>
             </div>
             @if(Auth::guest())

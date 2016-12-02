@@ -24,15 +24,18 @@
                     </p>
                     <div style="font-size: 28px;color: #555555;">7€</div>
                     <a href="{{ url('/user/addtocart/'.$disc->id) }}" class="btn btn-primary btn-lg text-white"><i class="fa fa-shopping-cart"></i> Añadir al carro</a>
+                    <!--
                     <h4>Cantidad</h4>
                     <form>
                         <div class="form-group">
                             <input type="number" class="form-control" min="1" value="1" style="width:70px;">
                         </div>
                     </form>
+                    -->
                 </div>
             </div>
         </div>
+        </br>
         <!--item view end-->
         <!--item desciption start-->
         <div class="row">
@@ -54,13 +57,18 @@
                         </ul>
                         
                         <div class="tab-content">
-                            <div class="tab-pane active" id="tab_default_1">
-                                <ul>
-                                    <li> White dwarf extraplanetary</li>
-                                    <li> Worldlets, white dwarf</li>
-                                    <li> Cambrian explosion, hydrogen</li>
-                                    <li> Euclid Sea of Tranquility</li>
-                                </ul>
+                            <div class="tab-pane active" id="tab_default_1"></br>
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <ul>
+                                            @foreach ($disc->tracks as $track)
+                                                <li>
+                                                    <a href="{{ $track->url }}" target="_blank">{{$track->name}}</a>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
                             <div class="tab-pane" id="tab_default_2">
                                 <div class="row">
@@ -108,4 +116,24 @@
         </div>
         <!--recently view item end-->
     </div>
+
+    <script type="text/javascript">
+        // Llamada al controller que corresponda para añadir el disco a la lista de recomendación del usuario.
+        var req = new XMLHttpRequest();
+        req.open("GET", "user/vieweddisc/{{$disc->id}}");
+        req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        req.onreadystatechange=function(){
+            if (req.readyState==4){
+                if (req.status==200){
+
+                }else{
+
+                }
+            }else{
+                
+            }
+        };
+
+        req.send();
+    </script>
 @endsection

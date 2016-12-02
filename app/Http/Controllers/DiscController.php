@@ -17,6 +17,7 @@ class DiscController extends Controller
 {
 
     protected $discs;
+    private $perPage = 5;
 
     public function __construct(Disc $discs)
     {
@@ -29,26 +30,39 @@ class DiscController extends Controller
     // Lista los últimos discos incorporados
     public function index(Request $request)
     {
-        //$perPage = 5;
-        //$currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $discList = Disc::all();
 
-        $discList = $this->get_disc_info($discList);            
-        //$col = new Collection($discList);
-        //$currentPageSearchResults = $col->slice(($currentPage - 1) * $perPage, $perPage)->all();
-        //$discList = new LengthAwarePaginator($currentPageSearchResults, count($col), $perPage);
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        
+        $discList = Disc::all();
+        $discList = $this->get_disc_info($discList);
+
+        $discList = $this->paginate($discList, $currentPage, $request);
+
         return view('discs.index', [
             'discs' => $discList,
         ]);
     }
 
+    private function paginate($discList, $currentPage, $request)
+    {
+        $col = new Collection($discList);
+        $currentPageSearchResults = $col->slice(($currentPage - 1) * $this->perPage, $this->perPage)->all();
+        $discList = new LengthAwarePaginator($currentPageSearchResults, count($col), $this->perPage);
+
+        $discList->setPath($request->url());
+        return $discList;
+    }
+
     public function discs_by_style(Request $request, $id)
     {
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
         $style = Style::find($id);
-        //$style_name = DB::table('styles')->where('id', $id)->value('name');
         $discs = $style->disc_list()->get();
         $discs = $this->get_disc_info($discs);
         $style_name = $style->name;
+
+        $discs = $this->paginate($discs, $currentPage, $request);
 
         return view('discs.style_discs', [
             'discs' => $discs,
@@ -58,9 +72,12 @@ class DiscController extends Controller
 
     public function discos_formato(Request $request, $id)
     {
-        $discList = Disc::where('format', $id)->get();
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
 
+        $discList = Disc::where('format', $id)->get();
         $discList = $this->get_disc_info($discList);
+
+        $discList = $this->paginate($discList, $currentPage, $request);
 
         return view('discs.index', [
             'discs' => $discList,
@@ -72,6 +89,7 @@ class DiscController extends Controller
         $disc = Disc::where('id', $id)->get()->first();
         $disc['artist'] = Disc::find($disc->id)->artist_list()->get();
         $disc['styles'] = Disc::find($disc->id)->style_list()->get();
+        $disc['tracks'] = Disc::find($disc->id)->track_list()->get();
         return view('discs.detail', [
             'disc' => $disc,
         ]);

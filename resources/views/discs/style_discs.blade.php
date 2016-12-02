@@ -99,6 +99,7 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        {{ $discs->links() }}
                     </div>
                 </div>
             @endif

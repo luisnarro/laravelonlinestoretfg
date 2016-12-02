@@ -19,16 +19,19 @@ class RecomendationIn extends Model
     		//$userdiscs = RecomendationIn::where('user_id', '=', $userid)->first();
 
     		$arraydisc = explode(",", $userdiscs->discs);
-    		if(count($arraydisc) < 4)
-	    	{
-	    		array_push($arraydisc, $discid);
-	    	}else
-	    	{
-	    		array_shift($arraydisc);
-	    		array_push($arraydisc, $discid);
-	    	}
+            if(!in_array($discid, $arraydisc))
+            {
+                if(count($arraydisc) < 4)
+                {
+                    array_push($arraydisc, $discid);
+                }else
+                {
+                    array_shift($arraydisc);
+                    array_push($arraydisc, $discid);
+                }
 
-	    	DB::table('recomendation_ins')->where('user_id', $userid)->update(['discs' => implode(",", $arraydisc)]);
+                DB::table('recomendation_ins')->where('user_id', $userid)->update(['discs' => implode(",", $arraydisc)]);
+            }
     	}
     }
 

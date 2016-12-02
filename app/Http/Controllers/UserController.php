@@ -124,12 +124,17 @@ class UserController extends Controller
 
     public function admin(Request $request)
     {
-
-        // Si el usuario es administrador.
-        
+        // Si el usuario es administrador.    
         return view('backend/shop_backend', [
             
         ]);
+    }
+
+    public function new_visited_disc(Request $request, $disc_id)
+    {
+        RecomendationIn::set_user_discs(strval(Auth::user()->id), $disc_id);
+
+        return "ok";
     }
 
 

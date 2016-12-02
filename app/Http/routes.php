@@ -48,6 +48,11 @@ Route::get('/user/remove_usercart_item/{rowId}', [
 	'uses' =>'UserController@remove_usercart_item'
 ]);
 
+Route::get('discs/details/user/vieweddisc/{id}', [
+	'as'	=> 'user.new_visited_disc',
+	'uses'	=> 'UserController@new_visited_disc'
+]);
+
 Route::get('/discs', 'DiscController@index');
 
 Route::get('/discs/formato/{id}', [
