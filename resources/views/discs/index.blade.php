@@ -11,6 +11,7 @@
                 </div>
 
                 <div class="panel-body">
+                    <div class="table-responsive">
 
                     <table class="table table-striped disc-table">
 
@@ -81,6 +82,7 @@
                         </tbody>
                         
                     </table>
+                </div>
                     {{ $discs->links() }}
                 </div>
             </div>
