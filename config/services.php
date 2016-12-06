@@ -38,13 +38,13 @@ return [
     'spotify' => [
         'client_id' => '1dc1b1957b9749798ccb2443391ba56b',
         'client_secret' => '4830497131824174b89c851896eb6788',
-        'redirect' => 'http://www.localhost:8080/proyectotfg/public/auth/spotify/callback',  
+        'redirect' => 'http://ec2-54-149-180-88.us-west-2.compute.amazonaws.com/auth/spotify/callback',  
     ],
 
     'twitter' => [
         'client_id' => 'yinKg5lw1d4RnGuGvgqvvfLwk',
         'client_secret' => '2o46A5KnyYzZJgVReXOoEEmCoXXOMjOWcLZwQfyl1ClMBtNPUv',
-        'redirect' => 'http://ec2-54-149-180-88.us-west-2.compute.amazonaws.com//auth/twitter/callback',
+        'redirect' => 'http://ec2-54-149-180-88.us-west-2.compute.amazonaws.com/auth/twitter/callback',
     ],
 
 ];
