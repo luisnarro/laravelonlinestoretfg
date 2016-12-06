@@ -64,6 +64,7 @@
                                     Sign in with Twitter
                                 </a>
                             </div>
+                            <!--
                             <div class="col-md-6 col-md-offset-4">
                                 </br>
                                 <a href="{{ url('auth/spotify') }}" class="btn btn-success onl_btn-spotify">
@@ -71,6 +72,7 @@
                                     Sign in with Spotify
                                 </a>
                             </div>
+                            -->
                         </div>
                     </form>
                 </div>
