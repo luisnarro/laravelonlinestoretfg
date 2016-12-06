@@ -44,7 +44,7 @@ return [
     'twitter' => [
         'client_id' => 'yinKg5lw1d4RnGuGvgqvvfLwk',
         'client_secret' => '2o46A5KnyYzZJgVReXOoEEmCoXXOMjOWcLZwQfyl1ClMBtNPUv',
-        'redirect' => 'http://localhost:8080/proyectotfg/public/auth/twitter/callback',
+        'redirect' => 'http://ec2-54-149-180-88.us-west-2.compute.amazonaws.com//auth/twitter/callback',
     ],
 
 ];
