@@ -59,7 +59,7 @@ class UserController extends Controller
             //Cart::instance('shoppingcart');
             Cart::restore(strval(Auth::user()->id));
             $this->usercart = Cart::instance('shoppingcart'.strval(Auth::user()->id));
-            $cartItem = $this->usercart->add($disc);
+            $cartItem = $this->usercart->add($disc, 1, ['discimage'=>$disc->img_path]);
             Cart::store(strval(Auth::user()->id));
 
             //Insertar el disco añadido en el carro en la tabla "recomendations_in"

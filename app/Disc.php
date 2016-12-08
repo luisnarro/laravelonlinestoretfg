@@ -66,7 +66,7 @@ class Disc extends Model implements Buyable
      */
     public function getBuyablePrice()
     {
-        return 99;
+        return $this->attributes['price'];
     }
 
 }

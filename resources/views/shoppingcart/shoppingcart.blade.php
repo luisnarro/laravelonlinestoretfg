@@ -29,7 +29,7 @@
                                     <form action="{{ action('UserController@update_usercart', ['rowId' => $item->rowId]) }}">
                                     <td data-th="Product">
                                         <div class="row">
-                                            <div class="col-sm-2 hidden-xs"><img src="http://placehold.it/100x100" alt="..." class="img-responsive"/></div>
+                                            <div class="col-sm-2 hidden-xs"><img src="{{ url('/').$item->options->discimage }}" alt="disc_image" class="img-responsive"/></div>
                                             <div class="col-sm-10">
                                                 <h4 class="nomargin">{{ $item->name }}</h4>
                                                 <!-- <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p> -->
@@ -76,10 +76,13 @@
                     </table>  
              
                 </div>
+                <!--
                 @foreach ($usercart as $item)
                     {{ var_dump($item) }}
                 @endforeach
                 {{ var_dump($usercart) }}
+                {{ var_dump($item->options->discimage) }}
+                -->
             </div>
         @endif
     </div>  
