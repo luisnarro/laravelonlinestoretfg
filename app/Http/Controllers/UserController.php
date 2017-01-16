@@ -42,10 +42,12 @@ class UserController extends Controller
         Cart::store('12345678'); */
 
         //RecomendationIn::request_rec_system(Auth::user()->id);
+        $recomendations = User::find(Auth::user()->id)->recomendations;
 
+        $recom = $recomendations->getAlbums();
         $prueba = Cart::content();
         return view('home', [
-           
+           'recomendations' => $recom,
         ]);
     }
 

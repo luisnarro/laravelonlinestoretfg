@@ -47,6 +47,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Role', 'user_role', 'user_id', 'role_id');
     }
 
+    public function recomendations()
+    {
+        return $this->hasOne('App\Recomendations');
+    }
+
     public function hasAnyRole($roles)
     {
         if (is_array($roles))

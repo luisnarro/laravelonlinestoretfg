@@ -140,4 +140,17 @@ Route::get('/admin/addalbumtodb', [
 	'middleware' => ['auth', 'roles'],
 	'roles' => ['Admin', 'Employee']
 ]);
+Route::get('/admin/useraddalbumtodb', [
+	'as'	=> 'admin.useraddalbumtodb',
+	'uses'	=> 'LastfmscrappingController@useraddalbumtodb',
+	'middleware' => ['auth', 'roles'],
+	'roles' => ['Admin', 'Employee']
+]);
+Route::get('/admin/gestionPedidos', [
+	'as'	=> 'admin.gestionPedidos',
+	'uses'	=> 'LastfmscrappingController@gestionPedidos',
+	'middleware' => ['auth', 'roles'],
+	'roles' => ['Admin', 'Employee']
+]);
+
 

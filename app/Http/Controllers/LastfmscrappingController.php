@@ -106,4 +106,18 @@ class LastfmscrappingController extends Controller
         return view('backend/shop_backend', [
         ]);
     }
+
+    public function useraddalbumtodb(Request $request)
+    {
+        //Añadir la info introducida por el usuario en la bbdd
+        return view('backend/shop_backend', [
+        ]);
+    }
+
+    public function gestionPedidos(Request $request)
+    {
+        //Redireccionar a la gestión de pedidos
+        return view('backend/order_management', [
+        ]);
+    }
 }
