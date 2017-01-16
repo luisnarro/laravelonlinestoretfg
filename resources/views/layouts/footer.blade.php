@@ -6,12 +6,17 @@
        
     <!-- Left Side Of Navbar -->
     <ul class="nav navbar-nav">
-        <li><a style="color: #fff" href="{{ url('/home') }}">Condiciones</a></li>
+        <li><a style="color: #fff" href="{{ url('/condiciones') }}">Condiciones</a></li>
     </ul>
     <ul class="nav navbar-nav">
-        <li><a style="color: #fff" href="{{ url('/discs') }}">Aviso legal</a></li>
-    </ul>                
-            
+        <li><a style="color: #fff" href="{{ url('/avisolegal') }}">Aviso legal</a></li>
+    </ul>
+    <ul class="nav navbar-nav">
+        <li><a style="color: #fff" href="{{ url('/gastosenvio') }}">Gastos de envío</a></li>
+    </ul>
+    <ul class="nav navbar-nav">
+        <li><a style="color: #fff" href="{{ url('/contacto') }}">Contacto</a></li>
+    </ul>   
             
   </div>
 </footer>

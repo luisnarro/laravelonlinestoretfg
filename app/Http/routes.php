@@ -152,5 +152,7 @@ Route::get('/admin/gestionPedidos', [
 	'middleware' => ['auth', 'roles'],
 	'roles' => ['Admin', 'Employee']
 ]);
-
-
+Route::get('/condiciones', 'HomeController@condiciones');
+Route::get('/avisolegal', 'HomeController@avisolegal');
+Route::get('/gastosenvio', 'HomeController@gastosenvio');
+Route::get('/contacto', 'HomeController@contacto');

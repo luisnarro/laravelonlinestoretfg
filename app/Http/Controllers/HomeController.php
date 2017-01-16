@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['condiciones', 'avisolegal', 'gastosenvio', 'contacto']]);
     }
 
     /**
@@ -25,5 +25,25 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function condiciones()
+    {
+        return view('legal/servicio');
+    }
+
+    public function avisolegal()
+    {
+        return view('legal/privacidad');
+    }
+
+    public function gastosenvio()
+    {
+        return view('legal/gastosenvio');
+    }
+
+    public function contacto()
+    {
+        return view('legal/contacto');
     }
 }
