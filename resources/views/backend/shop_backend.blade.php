@@ -13,6 +13,23 @@
             </div>
 
             <div class="panel panel-default">
+                <div class="panel-heading">Búsqueda de Disco en LAST FM</div>
+                <div class="panel-body">
+                    <h3>Busqueda por nombre del disco:</h3>
+                    <form class="navbar-form navbar-left" role="search" action="{{ url('admin/searchalbum') }}" method="GET">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="searchstring" id="searchstring" placeholder="Buscar">
+                        </div>
+                        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+                    </form>
+
+                    <form class="navbar-form navbar-left" role="search" action="{{ url('admin/rellenarbbdd') }}" method="GET">
+                        <button type="submit" class="btn btn-default">RELLENAR BBDD!</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
                 <div class="panel-heading">Añadir discos a la BBDD desde LAST FM</div>
                 <div class="panel-body">
                     <h3>Top Albums por Tag:</h3>
@@ -24,6 +41,25 @@
                             <option value="rock">Rock</option>
                             <option value="electronic">Electronic</option>
                             <option value="indie">Indie</option>
+                            <option value="singer">Singer</option>
+
+                            <option value="rap">Rap</option>
+                            <option value="ambient">Ambient</option>
+                            <option value="indie">Indie</option>
+                            <option value="blues">Blues</option>
+                            <option value="reggae">Reggae</option>
+
+                            <option value="punk">Punk</option>
+                            <option value="heavy">Heavy</option>
+                            <option value="alternative">Alternative</option>
+                            <option value="Classic">Classic</option>
+                            <option value="pop">Pop</option>
+
+                            <option value="brit">Brit</option>
+                            <option value="folk">Folk</option>
+                            <option value="funk">Funk</option>
+                            <option value="instrumental">Instrumental</option>
+                            <option value="grunge">Grunge</option>
                         </select>
                         <br><br>
                         <input type="submit">

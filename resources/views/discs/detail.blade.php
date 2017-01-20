@@ -134,6 +134,6 @@
             }
         };
 
-        req.send();
+        //req.send();
     </script>
 @endsection

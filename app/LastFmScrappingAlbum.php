@@ -21,7 +21,7 @@ class LastFmScrappingAlbum
     public $summary;
     public $tags = array();
     public $tracklist = array();
-    public $imgpath;
+    public $imgpath = null;
     public $discInstance;
     private static $instance = null;
 
@@ -39,10 +39,19 @@ class LastFmScrappingAlbum
         $this->artist_name = $this->checkParameter($xmlInfo->album->artist);
         $this->settags($xmlInfo->album->tags);
         $this->settracks($this->checkAttributeExists($xmlInfo->album->tracks));
-        //$this->tracklist = $this->checkAttributeExists($xmlInfo->album->tracks);
         $this->summary = $this->checkParameter($this->checkAttributeExists($xmlInfo->album->wiki)->summary);
-        $this->imgpath = '/images'.'/'.$this->mbid.'.png';
-        $this->save_image($this->checkParameter($xmlInfo->album->image[2]),'C:/xampp/htdocs/proyectotfg/public/images/'.$this->mbid.'.png');
+        //$this->imgpath = '/images'.'/'.$this->mbid.'.png';
+        $img_in = $this->checkParameter($xmlInfo->album->image[2]);
+        if(strlen($img_in) > 0)
+        {
+            $this->imgpath = '/images'.'/'.$this->mbid.'.png';
+            $this->save_image($this->checkParameter($xmlInfo->album->image[2]),'C:/xampp/htdocs/proyectotfg/public/images/'.$this->mbid.'.png');
+        }
+        
+        
+        //var_dump($this->mbid);
+        //var_dump($this->summary);
+        //var_dump($xmlInfo->album->name);
 
     }
 
@@ -143,7 +152,6 @@ class LastFmScrappingAlbum
                 "verify_peer_name"=>false,
             ),
         ); 
-
         $contents=file_get_contents($inPath, false, stream_context_create($arrContextOptions));
         file_put_contents($outPath,$contents);
     }

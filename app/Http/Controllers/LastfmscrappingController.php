@@ -57,7 +57,7 @@ class LastfmscrappingController extends Controller
         $albumInfo = null;
         $artist = null;
         $album = LastFmScrappingAlbum::getAlbumInfo($artistname, $albumname);
-
+        //var_dump($album);
         if ($album != null)
         {
             /*if($album->checkAlbumIsAdded())
@@ -119,5 +119,53 @@ class LastfmscrappingController extends Controller
         //Redireccionar a la gestión de pedidos
         return view('backend/order_management', [
         ]);
+    }
+
+    public function searchalbum(Request $request)
+    {
+        if ($request->has('searchstring'))
+        {
+            $url="http://ws.audioscrobbler.com/2.0/?method=album.search&album=".$request->input('searchstring')."&api_key=31b17cdc13c44d7b1f8d7bd80afa6b14";
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_URL, $url);    // get the url contents
+
+            $data = curl_exec($ch); // execute curl request
+            curl_close($ch);
+
+            $xml = simplexml_load_string($data);
+            $albums = $xml->albums[0];
+        }
+        var_dump($data);
+
+        return view('backend/shop_backend', 
+            [/*'data' => $albums*/]);
+    }
+
+    public function rellenarbbdd(Request $request)
+    {
+        //leer archivo y guardar cada disco
+        $myfile = fopen("C:\Users\LuisNarro\Desktop\prueba_importar.csv", "r") or die("Unable to open file!");
+        //var_dump(fgets($myfile));
+        while(!feof($myfile)) {
+            //echo fgets($myfile) . "<br>";
+            $line = fgets($myfile);
+            if(strlen($line) > 0)
+            {
+                $album_co = explode(',', $line)[0];
+                $artis_co = explode(',', $line)[1];
+                $album = substr($album_co, 1, strlen($album_co)-2);
+                $artist = substr($artis_co, 1, strlen($artis_co)-4);
+                $this->addalbum($request, $album, $artist);
+                $this->addalbumtodb($request);
+                //var_dump($album);
+                //var_dump($artist);
+            }
+           
+        }
+        fclose($myfile);
+
+        return view('backend/shop_backend', [
+            ]);
     }
 }

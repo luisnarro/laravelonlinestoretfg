@@ -152,6 +152,18 @@ Route::get('/admin/gestionPedidos', [
 	'middleware' => ['auth', 'roles'],
 	'roles' => ['Admin', 'Employee']
 ]);
+Route::get('/admin/searchalbum', [
+	'as'	=> 'admin.searchalbum',
+	'uses'	=> 'LastfmscrappingController@searchalbum',
+	'middleware' => ['auth', 'roles'],
+	'roles' => ['Admin', 'Employee']
+]);
+Route::get('/admin/rellenarbbdd', [
+	'as'	=> 'admin.rellenarbbdd',
+	'uses'	=> 'LastfmscrappingController@rellenarbbdd',
+	'middleware' => ['auth', 'roles'],
+	'roles' => ['Admin', 'Employee']
+]);
 Route::get('/condiciones', 'HomeController@condiciones');
 Route::get('/avisolegal', 'HomeController@avisolegal');
 Route::get('/gastosenvio', 'HomeController@gastosenvio');
