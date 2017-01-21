@@ -33,13 +33,17 @@ class DiscController extends Controller
 
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         
-        $discList = Disc::all();
+        $discsTotalCount = Disc::count();
+        $array = array_fill(0,$discsTotalCount, null);
+        $skip = $currentPage * $this->perPage;
+        $discList = Disc::skip($skip)->take($this->perPage)->get();
         $discList = $this->get_disc_info($discList);
 
-        $discList = $this->paginate($discList, $currentPage, $request);
+        $discListPag = $this->paginate($array, $currentPage, $request);
 
         return view('discs.index', [
             'discs' => $discList,
+            'discspag' => $discListPag,
         ]);
     }
 

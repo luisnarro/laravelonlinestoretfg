@@ -83,7 +83,7 @@
                         
                     </table>
                 </div>
-                    {{ $discs->links() }}
+                    {{ $discspag->links() }}
                 </div>
             </div>
             @if(Auth::guest())
