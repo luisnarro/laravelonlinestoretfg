@@ -34,7 +34,7 @@ class DiscController extends Controller
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         
         $discsTotalCount = Disc::count();
-        $array = array_fill(0,$discsTotalCount, null);
+        $array = array_fill(0,$discsTotalCount-1, null);
         $skip = $currentPage * $this->perPage;
         $discList = Disc::skip($skip)->take($this->perPage)->get();
         $discList = $this->get_disc_info($discList);
@@ -62,15 +62,23 @@ class DiscController extends Controller
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
 
         $style = Style::find($id);
-        $discs = $style->disc_list()->get();
+
+        $discsTotalCount = $style->disc_list()->count();
+        //$discsTotalCount = $discStyle->count();
+        $array = array_fill(0,$discsTotalCount-1, null);
+
+        $skip = $currentPage * $this->perPage;
+        $discs = $style->disc_list()->skip($skip)->take($this->perPage)->get();
+
         $discs = $this->get_disc_info($discs);
         $style_name = $style->name;
 
-        $discs = $this->paginate($discs, $currentPage, $request);
+        $discListPag = $this->paginate($array, $currentPage, $request);
 
         return view('discs.style_discs', [
             'discs' => $discs,
             'style_name' => $style_name,
+            'discspag' => $discListPag,
         ]);
     }
 
@@ -78,13 +86,18 @@ class DiscController extends Controller
     {
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
 
-        $discList = Disc::where('format', $id)->get();
+        $discsTotalCount = Disc::where('format', $id)->count();
+        $array = array_fill(0,$discsTotalCount-1, null);
+        $skip = $currentPage * $this->perPage;
+
+        $discList = Disc::where('format', $id)->skip($skip)->take($this->perPage)->get();
         $discList = $this->get_disc_info($discList);
 
-        $discList = $this->paginate($discList, $currentPage, $request);
+        $discListPag = $this->paginate($array, $currentPage, $request);
 
         return view('discs.index', [
             'discs' => $discList,
+            'discspag' => $discListPag,
         ]);
     }
 

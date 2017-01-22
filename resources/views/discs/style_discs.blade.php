@@ -99,7 +99,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{ $discs->links() }}
+                        {{ $discspag->links() }}
                     </div>
                 </div>
             @endif
