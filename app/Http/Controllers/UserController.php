@@ -44,7 +44,11 @@ class UserController extends Controller
         //RecomendationIn::request_rec_system(Auth::user()->id);
         $recomendations = User::find(Auth::user()->id)->recomendations;
 
-        $recom = $recomendations->getAlbums();
+        $recom = null;
+        if(!is_null($recomendations))
+        {
+            $recom = $recomendations->getAlbums();
+        }
         $prueba = Cart::content();
         return view('home', [
            'recomendations' => $recom,
