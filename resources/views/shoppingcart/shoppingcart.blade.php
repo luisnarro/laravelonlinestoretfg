@@ -31,7 +31,7 @@
                                         <div class="row">
                                             <div class="col-sm-2 hidden-xs"><img src="{{ url('/').$item->options->discimage }}" alt="disc_image" class="img-responsive"/></div>
                                             <div class="col-sm-10">
-                                                <h4 class="nomargin">{{ $item->name }}</h4>
+                                                <h4 class="nomargin">{!! Html::linkAction('DiscController@discs_details', $item->name, array($item->id)) !!}</h4>
                                                 <!-- <p>Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet.</p> -->
                                             </div>
                                         </div>

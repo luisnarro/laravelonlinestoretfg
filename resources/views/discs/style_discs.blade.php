@@ -42,6 +42,7 @@
                     </div>
 
                     <div class="panel-body">
+                        <div class="table-responsive">
 
                         <table class="table table-striped disc-table">
 
@@ -59,7 +60,7 @@
                                 @foreach ($discs as $disc)
                                     <tr>
                                         <td class="table-text">
-                                            <div>{{ $disc->name }}</div>
+                                            <div>{!! Html::linkAction('DiscController@discs_details', $disc->name, array($disc->id)) !!}</div>
                                         </td>
 
                                         <td>
@@ -98,6 +99,7 @@
                                     </tr>
                                 @endforeach
                             </tbody>
+                        </div>
                         </table>
                         {{ $discspag->links() }}
                     </div>
